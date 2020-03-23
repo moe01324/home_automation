@@ -41,7 +41,8 @@ Screenshots
 | description | links| 
 |--|--|
 | Media Player Card | https://github.com/kalkih/mini-media-player |
-| To minimize the header | https://github.com/maykar/compact-custom-header/|
+| HACS |https://github.com/hacs/integration|
+| Custom Header | https://github.com/maykar/custom-header |
 
 # KNX
 Following KNX devices are used withing this installation.
