@@ -42,15 +42,15 @@ Please mind that I adapt (play around) with the system all the time -> Most prob
 
 ### Screenshots Mobile
 
-Screenshots from my mobile.
+Screenshots from my android mobile.
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile1.jpg" height="500px" /><img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile2.jpg" height="500px" />
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile1.jpg" height="500px" />      <img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile2.jpg" height="500px" />
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile3.jpg" height="500px" /><img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile4.jpg" height="500px" />
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile3.jpg" height="500px" />      <img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile4.jpg" height="500px" />
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile5.jpg" height="500px" /><img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobil6.jpg" height="500px" />
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile5.jpg" height="500px" />      <img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobil6.jpg" height="500px" />
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile7.jpg" height="500px" /><img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile8.jpg" height="500px" />
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile7.jpg" height="500px" />      <img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile8.jpg" height="500px" />
 
 ## Automations 
 
