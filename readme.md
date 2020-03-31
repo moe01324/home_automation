@@ -11,7 +11,7 @@ Lenovo ThinkCentre M93p Tiny Mini PC
 
 Running Debian and Docker Images
 * Home Assistant - homeassistant/home-assistant:stable
-* Unify Controller - jacobalberty/unifi:latest
+* Unifi Controller - jacobalberty/unifi:latest
 * Portainer - portainer/portainer
 * Grafana - grafana/grafana:latest
 * Influx - influxdb:latest
@@ -19,7 +19,7 @@ Running Debian and Docker Images
 ## Home Assistant
 The "brain" of the home automation.
 
-## Unify Controller
+## Unifi Controller
 Gives an nice UI to manage everything network related. Though I have to admit a little bit unstable when adding new stuff or making major changes. If everything runs, it runs flawless.
 Also provides the VPN endpoint to connect from the outside.
 
@@ -41,6 +41,16 @@ Please mind that I adapt (play around) with the system all the time -> Most prob
 ### Screenshots Desktop
 
 ### Screenshots Mobile
+
+Screenshots from my mobile.
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile1.jpg" height="500px" /><img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile2.jpg" height="500px" />
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile3.jpg" height="500px" /><img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile4.jpg" height="500px" />
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile5.jpg" height="500px" /><img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobil6.jpg" height="500px" />
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile7.jpg" height="500px" /><img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile8.jpg" height="500px" />
 
 ## Automations 
 
