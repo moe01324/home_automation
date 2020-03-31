@@ -12,10 +12,11 @@ Lenovo ThinkCentre M93p Tiny Mini PC
 (i5 4570T 2.9 GHz, 8GB, 256GB Samsung SSD, HD Graphics 4600, WLAN)
 
 Running Debian and Docker Images
-* Home Assistant
-* Duplicaty 
-* Unify Controller
-* Portainer
+* Home Assistant - homeassistant/home-assistant:stable
+* Unify Controller - jacobalberty/unifi:latest
+* Portainer - portainer/portainer
+* Grafana - grafana/grafana:latest
+* Influx - influxdb:latest
 
 Home Assistant - https://www.home-assistant.io/
 More details on the HA instance further down.
@@ -23,7 +24,6 @@ More details on the HA instance further down.
 Portainer - https://www.portainer.io/
 To manage the different Docker images
 
-Unifi M 
 
 # Home Assistant
 
@@ -68,7 +68,7 @@ Ubiquiti Unifi Security Gateway
 
 Ubiquiti Unifi 8 Port Switch, POE
 
-Ubiquiti Unifi Access Points, 2x
+Ubiquiti Unifi Access Points, 3x
 
 [https://www.ui.com/](https://www.ui.com/)
 
@@ -88,9 +88,6 @@ One sensor in the living room, one sensor in the master bedroom.
 Integration via KNX into Home Assistant.
 Ventilation is lowered while away to save power and avoiding lowering the humidity unnecessarily. 
 
-### Amazon Fire 7 Tablet
-Default device to show the Visualisation from Homeassistant. Rather slow. Would not recommend it. Very often I just use my mobile phone.
-
 ### Nuki Smartlock
 An add-on [smart lock](https://nuki.io) to the front door. Bluethooth controlled (optional WIFI bridge available) and battery powered. Also comes with a keypad that is mounted outside the door.
 No need to take a key with you any more. In addition I can provided temporary access by giving out temporary keycodes.
@@ -98,16 +95,16 @@ Works flawless.
 Integrated into Home Assistant (unfortunately the API does not provide a userID for an Unlock right now, [feature request](https://developer.nuki.io/t/add-user-to-bridge-http-api-notifications/151/10) is raised with Nuki. 
 
 ### Sonos One
-Placed in the kitchen. Just for some background music.
+One in the kitchen, one in the office. Just for some background music.
 Integrated into Homeassistant.
 
 ### Alarm System
 Presence/motion detectors and window sensors are used to detect any movement if the house is set to "away mode". 
 
-Additional Security provided by GLOCK Ges.m.b.H.
+### Garden Irrigation
 
-
-
+A Raspberry Pi connect to some relays that are controlling Rainbird water valves.
+Integrated into Homeassistant for automation and control.
 
 # Links
 
@@ -120,5 +117,3 @@ https://knx-user-forum.de
 If you found this helpful, feel free to buy me a coffee:
 buymeacoff.ee/t2JeMGFmx
 
-
-> Written with [StackEdit](https://stackedit.io/).
