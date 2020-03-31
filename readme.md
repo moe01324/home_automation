@@ -21,7 +21,7 @@ The "brain" of the home automation.
 
 ## Unify Controller
 Gives an nice UI to manage everything network related. Though I have to admit a little bit unstable when adding new stuff or making major changes. If everything runs, it runs flawless.
-Also provided the VPN endpoint to connect from the outside.
+Also provides the VPN endpoint to connect from the outside.
 
 ## Portainer 
 To manage the docker containers via a web UI.
@@ -34,10 +34,15 @@ Is then shown within the HA user interface.
 # Home Assistant
 
 Home Assistant is used as a Visualization and Automation Tool. https://www.home-assistant.io/
-### General Setup
-Screenshots
+## General Setup
 
-### Automations 
+Please mind that I adapt (play around) with the system all the time -> Most probably the screenshots do NOT match the config provided here.
+
+### Screenshots Desktop
+
+### Screenshots Mobile
+
+## Automations 
 
 In my opinion a smart home is only really smart if most of the actions and adaptions happen automatically. Doing something via a stupid app is not smart.
 
@@ -45,13 +50,15 @@ In my opinion a smart home is only really smart if most of the actions and adapt
 My coffee machine (https://xenia.coffee/) needs around 12-15 minutes to fully heat up. Therefore it gets switched on automatically in the morning. 6am during the week. 7am on the weekends. Runs for half an hour.
 
 * Window Blinds
+Rather complex setup...
+Trying to allow to use as much sun energy during the colder months, and try to avoid heating the house up during the warmer months.
+In addition some comfort features like closing the blinds in the bath at night.
 
 * Lights 
 All main lights are controlled via KNX motion detectors. Usually I dont need to use any light switches.
 
-
-**Theme:**
-[https://community.home-assistant.io/t/clear-theme/100464](https://community.home-assistant.io/t/clear-theme/100464)
+* Garden Irrigation
+Can be scheduled via HA UI.
 
 **Additional enhancements used:**
 | description | links| 
@@ -59,6 +66,11 @@ All main lights are controlled via KNX motion detectors. Usually I dont need to 
 | Media Player Card | https://github.com/kalkih/mini-media-player |
 | HACS |https://github.com/hacs/integration|
 | Custom Header | https://github.com/maykar/custom-header |
+| Luxtronik Integration | https://github.com/Bouni/Home-Assistant-Luxtronik |
+
+## Telegram Integration
+A Telegram Bot is integrated into HA. Allows to send me notifications. E.g. if I leave the house and windows are still open. In case the smoke detectors are alarming etc.
+Also I can send commands to the HA. Start the coffee machine if I am on my way back home.
 
 # KNX
 Following KNX devices are used withing this installation.
@@ -80,21 +92,24 @@ Some of the automation logic is directly on the devices, others is supported by 
 ## KNX Switches
 I really like the fully customizable MDT Glastaster.
 
-Pretty default switch that controls lights and the coffee machine.
+Pretty default switch that controls lights and the coffee machine in the kitchen/dinner area.
 <img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/switch1.jpg" height="500px" />
 
+Second page of the kitchen/dinner area. Controlling window blinds and showing the outside temperature.
 <img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/switch1.jpg" height="500px" />
 
+Switch at the main door. Top left shows if any windows/doors are open. 
 <img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/switch1.jpg" height="500px" />
 
 # Network
+Using Ubiquitu Unifi components. Good performance/price point in my opinion.
+[https://www.ui.com/](https://www.ui.com/)
+
 Ubiquiti Unifi Security Gateway
 
-Ubiquiti Unifi 8 Port Switch, POE
+2x Ubiquiti Unifi 8 Port Switch, POE
 
-Ubiquiti Unifi Access Points, 3x
-
-[https://www.ui.com/](https://www.ui.com/)
+3x Ubiquiti Unifi Access Points
 
 The Unifi Controller is running as a docker container.
 
