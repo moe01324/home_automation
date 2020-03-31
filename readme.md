@@ -3,8 +3,6 @@
 This page shall document and present the home automation I am running.
 Feel free to contact me with detailed questions.
 
-
-
 # Server
 
 Server
@@ -18,13 +16,38 @@ Running Debian and Docker Images
 * Grafana - grafana/grafana:latest
 * Influx - influxdb:latest
 
+## Home Assistant
+The "brain" of the home automation.
+
+## Unify Controller
+Gives an nice UI to manage everything network related. Though I have to admit a little bit unstable when adding new stuff or making major changes. If everything runs, it runs flawless.
+Also provided the VPN endpoint to connect from the outside.
+
+## Portainer 
+To manage the docker containers via a web UI.
+
+## Grafana/Influx
+For long term storage and visualisation of some data.
+Is then shown within the HA user interface.
+
+
 # Home Assistant
 
 Home Assistant is used as a Visualization and Automation Tool. https://www.home-assistant.io/
 ### General Setup
 Screenshots
+
 ### Automations 
 
+In my opinion a smart home is only really smart if most of the actions and adaptions happen automatically. Doing something via a stupid app is not smart.
+
+* Coffee Machine
+My coffee machine (https://xenia.coffee/) needs around 12-15 minutes to fully heat up. Therefore it gets switched on automatically in the morning. 6am during the week. 7am on the weekends. Runs for half an hour.
+
+* Window Blinds
+
+* Lights 
+All main lights are controlled via KNX motion detectors. Usually I dont need to use any light switches.
 
 
 **Theme:**
@@ -54,7 +77,15 @@ Some of the automation logic is directly on the devices, others is supported by 
 | MDT Stromversorgung 640mA | https://www.mdt.de/Interfaces.html |  |
 | ComfoConnect KNX C | https://www.zehnder-systems.de/produkte-und-systeme/komfortable-wohnraumlueftung/zehnder-comfoconnect-knx-c |  |
 
+## KNX Switches
+I really like the fully customizable MDT Glastaster.
 
+Pretty default switch that controls lights and the coffee machine.
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/switch1.jpg" height="500px" />
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/switch1.jpg" height="500px" />
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/switch1.jpg" height="500px" />
 
 # Network
 Ubiquiti Unifi Security Gateway
@@ -70,16 +101,26 @@ The Unifi Controller is running as a docker container.
 # Other Components
 A quick overview of some other devices and compontents that are integrated into the overall solution.
 
+### Distribution Box
+Houses all the fuses and KNX components.
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/elektro.jpg" height="500px" />
+
 ### Alpha Innotect Heatpump
 [LWAV82R1/3-HSV9M1/3](https://www.alpha-innotec.de/endkunde/produkte/waermepumpen-produktkatalog/produktkatalog/detailseite/lwav82r13-hsv9m13.html) 
 This also has a webserver/http interface. Integrated into Home Assistant via [https://github.com/Bouni/Home-Assistant-Luxtronik](https://github.com/Bouni/Home-Assistant-Luxtronik) 
 It provides access to lots of data from the heatpump. Also controlling it would be possible, but I don't have the need to adapt anything regularly. 
+
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/wp.jpg" height="500px" />
 
 ### Zehnder Q350 
 A [automated ventilation](https://www.zehnder-systems.de/l%C3%BCftungsger%C3%A4te-zehnder-comfounit/komfort-l%C3%BCftungsger%C3%A4te-mit-w%C3%A4rmer%C3%BCckgewinnung-zentral/komfort-l%C3%BCftungsger%C3%A4te-bis-800-m%C2%B3h/zehnder-comfoair-q350-tr) system that provides fresh air. No need to open windows to get fresh air into the house. Detecting air quality by CO2 sensor and triggering the different levels of ventilation.
 One sensor in the living room, one sensor in the master bedroom.
 Integration via KNX into Home Assistant.
 Ventilation is lowered while away to save power and avoiding lowering the humidity unnecessarily. 
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/kwl.jpg" height="500px" />
 
 ### Nuki Smartlock
 An add-on [smart lock](https://nuki.io) to the front door. Bluethooth controlled (optional WIFI bridge available) and battery powered. Also comes with a keypad that is mounted outside the door.
@@ -99,6 +140,12 @@ Presence/motion detectors and window sensors are used to detect any movement if 
 A Raspberry Pi connect to some relays that are controlling Rainbird water valves.
 Integrated into Homeassistant for automation and control.
 
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/irrig1.jpg" height="500px" />
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/irrig2.jpg" height="500px" />
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/irrig3.jpg" height="500px" />
+
 # Links
 
 Following online resource were quite helpful for me:
@@ -108,5 +155,5 @@ https://knx-user-forum.de
 
 
 If you found this helpful, feel free to buy me a coffee:
-buymeacoff.ee/t2JeMGFmx
+https://www.buymeacoffee.com/t2JeMGFmx
 
