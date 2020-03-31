@@ -1,4 +1,4 @@
-# **Home Automation by moe**
+# **Home Automation**
 
 This page shall document and present the home automation I am running.
 Feel free to contact me with detailed questions.
@@ -18,16 +18,9 @@ Running Debian and Docker Images
 * Grafana - grafana/grafana:latest
 * Influx - influxdb:latest
 
-Home Assistant - https://www.home-assistant.io/
-More details on the HA instance further down.
-
-Portainer - https://www.portainer.io/
-To manage the different Docker images
-
-
 # Home Assistant
 
-Home Assistant is used as a Visualization and Automation Tool.
+Home Assistant is used as a Visualization and Automation Tool. https://www.home-assistant.io/
 ### General Setup
 Screenshots
 ### Automations 
