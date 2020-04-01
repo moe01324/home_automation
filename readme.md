@@ -30,6 +30,9 @@ To manage the docker containers via a web UI.
 For long term storage and visualisation of some data.
 Is then shown within the HA user interface.
 
+## Keepass
+https://keepass.info/
+To manage all the passwords. 
 
 # Home Assistant
 
