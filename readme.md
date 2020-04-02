@@ -43,33 +43,33 @@ Please mind that I adapt (play around) with the system all the time -> Most prob
 
 ### Screenshots Desktop
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen1.png" width="800px" /> 
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/screens/screen1.png" width="800px" /> 
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen1dark.png" width="800px" /> 
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/screens/screen1dark.png" width="800px" /> 
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen2.png" width="800px" /> 
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/screens/screen2.png" width="800px" /> 
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen3.png" width="800px" /> 
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/screens/screen3.png" width="800px" /> 
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen4.png" width="800px" /> 
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/screens/screen4.png" width="800px" /> 
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen5.png" width="800px" /> 
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/screens/screen5.png" width="800px" /> 
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen6.png" width="800px" /> 
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/screens/screen6.png" width="800px" /> 
 
 ### Screenshots Mobile
 
 Screenshots from my android mobile.
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile1.jpg" height="500px" />      <img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile2.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/mobile/mobile1.jpg" height="500px" />      <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/mobile/mobile2.jpg" height="500px" />
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile3.jpg" height="500px" />      <img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile4.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/mobile/mobile3.jpg" height="500px" />      <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/mobile/mobile4.jpg" height="500px" />
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile5.jpg" height="500px" />      <img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobil6.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/mobile/mobile5.jpg" height="500px" />      <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/mobile/mobil6.jpg" height="500px" />
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile7.jpg" height="500px" />      <img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile8.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/mobile/mobile7.jpg" height="500px" />      <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/mobile/mobile8.jpg" height="500px" />
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/dark.jpg" height="500px" /> 
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/mobile/dark.jpg" height="500px" /> 
 
 
 ## Automations 
@@ -102,7 +102,7 @@ Can be scheduled via HA UI.
 A Telegram Bot is integrated into HA. Allows to send me notifications. E.g. if I leave the house and windows are still open. In case the smoke detectors are alarming etc.
 Also I can send commands to the HA. Start the coffee machine if I am on my way back home.
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/telegram.jpg" height="500px" /> 
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/mobile/telegram.jpg" height="500px" /> 
 
 # KNX
 Following KNX devices are used withing this installation.
@@ -125,13 +125,13 @@ Some of the automation logic is directly on the devices, others is supported by 
 I really like the fully customizable MDT Glastaster.
 
 Pretty default switch that controls lights and the coffee machine in the kitchen/dinner area.
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/switch1.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/switch1.jpg" height="500px" />
 
 Second page of the kitchen/dinner area. Controlling window blinds and showing the outside temperature.
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/switch1.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/switch1.jpg" height="500px" />
 
 Switch at the main door. Top left shows if any windows/doors are open. 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/switch1.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/switch1.jpg" height="500px" />
 
 # Network
 Using Ubiquitu Unifi components. Good performance/price point in my opinion.
@@ -158,8 +158,7 @@ Houses all the fuses and KNX components.
 This also has a webserver/http interface. Integrated into Home Assistant via [https://github.com/Bouni/Home-Assistant-Luxtronik](https://github.com/Bouni/Home-Assistant-Luxtronik) 
 It provides access to lots of data from the heatpump. Also controlling it would be possible, but I don't have the need to adapt anything regularly. 
 
-
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/wp.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/wp.jpg" height="500px" />
 
 ### Zehnder Q350 
 A [automated ventilation](https://www.zehnder-systems.de/l%C3%BCftungsger%C3%A4te-zehnder-comfounit/komfort-l%C3%BCftungsger%C3%A4te-mit-w%C3%A4rmer%C3%BCckgewinnung-zentral/komfort-l%C3%BCftungsger%C3%A4te-bis-800-m%C2%B3h/zehnder-comfoair-q350-tr) system that provides fresh air. No need to open windows to get fresh air into the house. Detecting air quality by CO2 sensor and triggering the different levels of ventilation.
@@ -167,7 +166,7 @@ One sensor in the living room, one sensor in the master bedroom.
 Integration via KNX into Home Assistant.
 Ventilation is lowered while away to save power and avoiding lowering the humidity unnecessarily. 
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/kwl.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/kwl.jpg" height="500px" />
 
 ### Nuki Smartlock
 An add-on [smart lock](https://nuki.io) to the front door. Bluethooth controlled (optional WIFI bridge available) and battery powered. Also comes with a keypad that is mounted outside the door.
@@ -187,11 +186,11 @@ Presence/motion detectors and window sensors are used to detect any movement if 
 A Raspberry Pi connect to some relays that are controlling Rainbird water valves.
 Integrated into Homeassistant for automation and control.
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/irrig1.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/irrig1.jpg" height="500px" />
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/irrig2.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/irrig2.jpg" height="500px" />
 
-<img src="https://github.com/moe01324/home_automation/blob/master/pics/misc/irrig3.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/irrig3.jpg" height="500px" />
 
 # Links
 
