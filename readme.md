@@ -124,14 +124,14 @@ Some of the automation logic is directly on the devices, others is supported by 
 ## KNX Switches
 I really like the fully customizable MDT Glastaster.
 
-Pretty default switch that controls lights and the coffee machine in the kitchen/dinner area.
+Pretty default switch that controls lights and the coffee machine in the kitchen/dinner area. The nice thing about this switches is that they are really very customizable. E.g. the icons are adaptable, colors can be changed etc.
 <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/switch1.jpg" height="500px" />
 
 Second page of the kitchen/dinner area. Controlling window blinds and showing the outside temperature.
-<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/switch1.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/switch2.jpg" height="500px" />
 
 Switch at the main door. Top left shows if any windows/doors are open. 
-<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/switch1.jpg" height="500px" />
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/switch3.jpg" height="500px" />
 
 # Network
 Using Ubiquitu Unifi components. Good performance/price point in my opinion.
@@ -161,10 +161,8 @@ It provides access to lots of data from the heatpump. Also controlling it would 
 <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/wp.jpg" height="500px" />
 
 ### Zehnder Q350 
-A [automated ventilation](https://www.zehnder-systems.de/l%C3%BCftungsger%C3%A4te-zehnder-comfounit/komfort-l%C3%BCftungsger%C3%A4te-mit-w%C3%A4rmer%C3%BCckgewinnung-zentral/komfort-l%C3%BCftungsger%C3%A4te-bis-800-m%C2%B3h/zehnder-comfoair-q350-tr) system that provides fresh air. No need to open windows to get fresh air into the house. Detecting air quality by CO2 sensor and triggering the different levels of ventilation.
-One sensor in the living room, one sensor in the master bedroom.
+A [automated ventilation](https://www.zehnder-systems.de/l%C3%BCftungsger%C3%A4te-zehnder-comfounit/komfort-l%C3%BCftungsger%C3%A4te-mit-w%C3%A4rmer%C3%BCckgewinnung-zentral/komfort-l%C3%BCftungsger%C3%A4te-bis-800-m%C2%B3h/zehnder-comfoair-q350-tr) system that provides fresh air. No need to open windows to get fresh air into the house. Triggering different levels of ventilation by time based automation in HA.
 Integration via KNX into Home Assistant.
-Ventilation is lowered while away to save power and avoiding lowering the humidity unnecessarily. 
 
 <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/kwl.jpg" height="500px" />
 
@@ -180,6 +178,10 @@ Integrated into Homeassistant.
 
 ### Alarm System
 Presence/motion detectors and window sensors are used to detect any movement if the house is set to "away mode". 
+
+### Smoke Detectors
+
+Are also integrated into Homeassistant.
 
 ### Garden Irrigation
 
