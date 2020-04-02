@@ -69,6 +69,9 @@ Screenshots from my android mobile.
 
 <img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile7.jpg" height="500px" />      <img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/mobile8.jpg" height="500px" />
 
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/dark.jpg" height="500px" /> 
+
+
 ## Automations 
 
 In my opinion a smart home is only really smart if most of the actions and adaptions happen automatically. Doing something via a stupid app is not smart.
@@ -98,6 +101,8 @@ Can be scheduled via HA UI.
 ## Telegram Integration
 A Telegram Bot is integrated into HA. Allows to send me notifications. E.g. if I leave the house and windows are still open. In case the smoke detectors are alarming etc.
 Also I can send commands to the HA. Start the coffee machine if I am on my way back home.
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/mobile/telegram.jpg" height="500px" /> 
 
 # KNX
 Following KNX devices are used withing this installation.
