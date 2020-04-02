@@ -43,6 +43,20 @@ Please mind that I adapt (play around) with the system all the time -> Most prob
 
 ### Screenshots Desktop
 
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen1.png" width="800px" /> 
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen1dark.png" width="800px" /> 
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen2.png" width="800px" /> 
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen3.png" width="800px" /> 
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen4.png" width="800px" /> 
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen5.png" width="800px" /> 
+
+<img src="https://github.com/moe01324/home_automation/blob/master/pics/screens/screen6.png" width="800px" /> 
+
 ### Screenshots Mobile
 
 Screenshots from my android mobile.
