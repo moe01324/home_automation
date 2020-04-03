@@ -9,15 +9,12 @@ Server
 Lenovo ThinkCentre M93p Tiny Mini PC
 (i5 4570T 2.9 GHz, 8GB, 256GB Samsung SSD, HD Graphics 4600, WLAN)
 
-Running Debian and Docker Images
+Running Debian with Docker Images
 * Home Assistant - homeassistant/home-assistant:stable
 * Unifi Controller - jacobalberty/unifi:latest
 * Portainer - portainer/portainer
 * Grafana - grafana/grafana:latest
 * Influx - influxdb:latest
-
-## Home Assistant
-The "brain" of the home automation.
 
 ## Unifi Controller
 Gives an nice UI to manage everything network related. Though I have to admit a little bit unstable when adding new stuff or making major changes. If everything runs, it runs flawless.
@@ -37,9 +34,12 @@ To manage all the passwords.
 # Home Assistant
 
 Home Assistant is used as a Visualization and Automation Tool. https://www.home-assistant.io/
+
 ## General Setup
 
 Please mind that I adapt (play around) with the system all the time -> Most probably the screenshots do NOT match the config provided here.
+
+Configuration is available in the folder /haconfig_gh/
 
 ### Screenshots Desktop
 
@@ -93,8 +93,8 @@ Can be scheduled via HA UI.
 **Additional enhancements used:**
 | description | links| 
 |--|--|
+| HACS |https://github.com/hacs/integration |
 | Media Player Card | https://github.com/kalkih/mini-media-player |
-| HACS |https://github.com/hacs/integration|
 | Custom Header | https://github.com/maykar/custom-header |
 | Luxtronik Integration | https://github.com/Bouni/Home-Assistant-Luxtronik |
 
