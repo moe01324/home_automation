@@ -1,0 +1,34 @@
+alarmgruppe:
+  name: AllAlarms
+  entities:
+    - binary_sensor.alarm_ankleide
+    - binary_sensor.alarm_bad_eg
+    - binary_sensor.alarm_bad_og
+    - binary_sensor.alarm_buro
+    - binary_sensor.alarm_essbereich
+    - binary_sensor.alarm_flur_eg
+    - binary_sensor.alarm_flur_og
+    - binary_sensor.alarm_schlafzimmer
+    - binary_sensor.alarm_schlafzimmer_2
+    - binary_sensor.alarm_stiege
+    - binary_sensor.alarm_wc_og
+    - binary_sensor.alarm_wohnzimmer
+    - binary_sensor.alarm_zimmer
+      
+covergruppe:
+  name: AllCovers
+  entities:
+    - cover.technikraum
+    - cover.bad_eg
+    - cover.wohnzimmer
+    - cover.fixglas
+    - cover.esszimmer
+    - cover.kuche
+    - cover.flur
+    - cover.wc
+    - cover.bad_og
+    - cover.buro
+    - cover.zimmer
+    - cover.ankleide
+    - cover.schlaf
+    - cover.technikraum

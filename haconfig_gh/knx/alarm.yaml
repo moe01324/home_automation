@@ -1,0 +1,76 @@
+binary_sensor:
+
+##Kamera
+  - platform: hikvision
+    host: 192.168.1.65
+    name: Kamera Garage
+    username: !secret hikuser
+    password: !secret hikpwd
+    
+## Alarm
+    
+  - platform: knx
+    state_address: '7/2/1'
+    name: Alarm Flur OG
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/2'
+    name: Alarm Schlafzimmer
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/3'
+    name: Alarm Flur EG
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/4'
+    name: Alarm Bad EG
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/5'
+    name: Alarm Wohnzimmer
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/6'
+    name: Alarm Essbereich
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/7'
+    name: Alarm Stiege
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/8'
+    name: Alarm Büro
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/9'
+    name: Alarm Zimmer
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/10'
+    name: Alarm Ankleide
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/11'
+    name: Alarm WC OG
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/12'
+    name: Alarm Bad OG
+    device_class: 'motion'
+    
+  - platform: knx
+    state_address: '7/2/13'
+    name: Alarm Schlafzimmer
+    device_class: 'motion'
+    

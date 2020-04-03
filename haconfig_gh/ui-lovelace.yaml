@@ -1,0 +1,813 @@
+title: !secret name
+
+resources:
+  - url: /hacsfiles/calendar-card/calendar-card.js
+    type: js
+  - url: /hacsfiles/custom-header/custom-header.js
+    type: module  
+  - url: /local/entity-markdown.js
+    type: js
+  - url: /hacsfiles/lovelace-card-preloader.js
+    type: js  
+  - url: /hacsfiles/weather-card/weather-card.js
+    type: module
+  - url: /hacsfiles/spotify-card/spotify-card.js
+    type: module
+  - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+    type: module    
+  - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
+    type: module    
+  - url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js  
+    type: module    
+  - url: /hacsfiles/button-card/button-card.js
+    type: module 
+  - url: /hacsfiles/simple-thermostat/simple-thermostat.js
+    type: module 
+  - url: /hacsfiles/lovelace-swipe-navigation/swipe-navigation.js
+    type: module 
+
+excluded_entities:
+  - weblink.router
+  
+custom_header:
+  compact_mode: true
+  hide_help: true
+  chevrons: false
+  
+swipe_nav:
+  wrap: true
+  animate: swipe
+  swipe_amount: 15
+  
+views:
+  - title: !secret name
+    id: gramat
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:weather-card
+            entity: weather.wetter
+            current: true
+            details: true
+            forecast: true
+            
+          - type: custom:mini-graph-card
+            name: Aussentemperatur
+            icon: mdi:temperature-celsius
+            hours_to_show: 24
+            line_width: 4
+            font_size: 75
+            points_per_hour: 3
+            entities:
+              - entity: sensor.aussentemperatur
+                name: Wetterstation Temp
+            align_state: center
+            hour24: true
+            animate: true
+            show:
+              fill: false
+            color_thresholds:
+              - value: 12
+                color: "#42f49e"          
+              - value: 25
+                color: "#f39c12"
+              - value: 30
+                color: "#c0392b"
+            
+          - type: iframe
+            url: 
+            aspect_ratio: 55%
+
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Raffstores Gesamt
+            show_header_toggle: false
+            entities:
+              - type: section
+              - entity: cover.alle
+              
+          - type: custom:entity-markdown
+            id: markdown-example
+            title: Temp Unterschied
+            entity: sensor.temp_difference_text
+            
+          - type: custom:calendar-card
+            title: "Kalendar"
+            progressBar: true
+            numberOfDays: 10
+            showLocation: true
+            entities:
+              - calendar.cal
+
+      - type: vertical-stack
+        cards:
+          - type: custom:mini-graph-card
+            name: Windgeschwindigkeit
+            icon: mdi:weather-windy
+            line_color: LightSteelBlue
+            line_width: 4
+            font_size: 75
+            hours_to_show: 24
+            points_per_hour: 10
+            aggregate_func: max
+            entities:
+              - entity: sensor.wind
+                name: Wetterstation Wind
+            align_state: center
+            hour24: true
+            animate: true
+            show:
+              fill: false
+            color_thresholds:
+              - value: 3
+                color: "#f39c12"
+              - value: 6
+                color: "#d35400"
+              - value: 9
+                color: "#c0392b"
+            
+          - type: custom:mini-graph-card
+            name: Luftqualität
+            icon: mdi:air-filter
+            hours_to_show: 24
+            points_per_hour: 3
+            line_width: 4
+            font_size: 75
+            decimals: 0
+            show:
+              fill: false
+            entities:
+              - entity: sensor.co2_wohnzimmer
+                name: Wohnzimmer
+                show_state: true
+                color: '#0099CC'
+              - entity: sensor.co2_schlafzimmer
+                name: Schlafzimmer     
+                show_state: true
+            align_state: center
+            color_thresholds:
+              - value: 3
+                color: "#12f34e"
+              - value: 600
+                color: "#d35400"
+              - value: 1000
+                color: "#c0392b"
+                
+          - type: entities
+            title: Zuhause
+            show_header_toggle: false
+            entities:
+
+        
+  - icon: mdi:lightbulb-on-outline
+    title: Lichter
+    
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: glance
+            title: Wohnbereich
+            show_state: false
+            entities:
+             - entity: light.bodenspots
+               tap_action: 
+                 action: toggle
+               name: Bodenspots
+               icon: mdi:spotlight
+             - entity: light.bar
+               tap_action:
+                 action: toggle
+               icon: mdi:broom
+               name: Bar
+             - entity: light.esstisch
+               tap_action:
+                 action: toggle
+               name: Esstisch
+               icon: mdi:ceiling-light
+             - entity: light.kuche
+               tap_action:
+                 action: toggle
+               name: Küche
+               icon: mdi:lightbulb-on
+             - entity: light.kuche_arbeitsflache
+               tap_action:
+                 action: toggle
+               name: Küchenzeile
+               icon: mdi:lightbulb-on
+             - entity: light.wohnzimmer
+               tap_action:
+                 action: toggle
+               icon: mdi:lightbulb-on
+               name: Wohnzimmer
+             - entity: switch.pm_sperre_kuche
+               tap_action:
+                 action: toggle
+               name: Sperre PM Küche
+               icon: mdi:access-point-network-off
+             - entity: switch.pm_sperre_wohnzimmer
+               tap_action:
+                 action: toggle
+               name: Sperre PM Wohnzimmer
+               icon: mdi:access-point-network-off
+             - entity: switch.pm_sperre_flur_eg
+               tap_action:
+                 action: toggle
+               name: Sperre PM Flur EG
+               icon: mdi:access-point-network-off
+            columns: 3
+            
+          - type: glance
+            title: Schalten
+            show_state: false
+            entities:
+             - entity: switch.kaffeemaschine
+               tap_action: 
+                 action: toggle
+               name: Kaffeemaschine
+               icon: mdi:coffee-outline
+             - entity: switch.handtuchheizkorper
+               tap_action: 
+                 action: toggle
+               name: Handtuch
+               icon: mdi:radiator
+             - entity: switch.steckdose_og
+               tap_action: 
+                 action: toggle
+               name: Steckdose OG
+               icon: mdi:power-plug
+             - entity: switch.steckdose_eg
+               tap_action: 
+                 action: toggle
+               name: Steckdose EG
+               icon: mdi:power-plug
+             - entity: switch.ventilator
+               tap_action: 
+                 action: toggle
+               name: Ventilator
+               icon: mdi:fan
+               
+            columns: 3
+        
+      - type: glance
+        title: Licht EG
+        show_state: false
+        entities:
+         - entity: light.aussen_eingang
+           tap_action: 
+             action: toggle
+           name: Aussen Eingang
+         - entity: light.terrasse
+           tap_action:
+             action: toggle
+           icon: 
+           name: Terrasse
+         - entity: light.flur_eg
+           tap_action:
+             action: toggle
+           name: Flur
+         - entity: light.bad_eg
+           tap_action:
+             action: toggle
+           name: Bad EG
+         - entity: light.stiege
+           tap_action:
+             action: toggle
+           name: Stiege
+         - entity: light.technikraum
+           tap_action:
+             action: toggle
+           name: Technikraum
+        columns: 3
+        
+      - type: glance
+        title: Licht OG
+        show_state: false
+        entities:
+         - entity: light.balkon
+           tap_action: 
+             action: toggle
+           name: Balkon
+         - entity: light.flur_og
+           tap_action:
+             action: toggle
+           name: Flur
+         - entity: light.schlafzimmer
+           tap_action:
+             action: toggle
+           name: Schlafzimmer
+         - entity: light.ankleide
+           tap_action:
+             action: toggle
+           name: Ankleide
+         - entity: light.bad_og
+           tap_action:
+             action: toggle
+           name: Bad OG
+         - entity: light.zimmer_2
+           tap_action:
+             action: toggle
+           name: Zimmer
+         - entity: light.buro
+           tap_action:
+             action: toggle
+           name: Büro
+         - entity: light.wc_og
+           tap_action:
+             action: toggle
+           name: WC
+        columns: 4
+        
+  - icon: mdi:thermometer-lines
+    title: Heizung
+    cards:
+      - type: vertical-stack
+        cards:
+        - type: glance
+          title: KWL
+          entities:
+           - entity: switch.kwl_stufe_0
+             tap_action: 
+               action: toggle
+             name: Stufe 0
+             icon: mdi:fan
+           - entity: switch.kwl_stufe_1
+             tap_action:
+              action: toggle
+             name: Stufe 1
+             icon: mdi:fan
+           - entity: switch.kwl_stufe_2
+             tap_action:
+               action: toggle
+             name: Stufe 2
+             icon: mdi:fan
+           - entity: switch.kwl_stufe_3
+             tap_action:
+               action: toggle
+             name: Stufe 3
+             icon: mdi:fan
+           - entity: sensor.kwl_filter_replace
+             name: Filter H
+             icon: mdi:fan
+          columns: 5
+          
+        - type: picture-elements
+          image: "/local/kwl2.png"
+          elements:
+              - type: state-label
+                entity: sensor.kwl_luftfeuchtigkeit_exhaust
+                style:
+                  top: 12%
+                  left: 32%
+                  font-size: 25px
+              - type: state-label
+                entity: sensor.kwl_luftfeuchtigkeit_extract
+                style:
+                  top: 12%
+                  left: 80%
+                  font-size: 25px
+              - type: state-label
+                entity: sensor.kwl_luftfeuchtigkeit_outdoor
+                style:
+                  top: 85%
+                  left: 32%
+                  font-size: 25px
+              - type: state-label
+                entity: sensor.kwl_luftfeuchtigkeit_supply
+                style:
+                  top: 85%
+                  left: 80%
+                  font-size: 25px
+              - type: state-label
+                entity: sensor.kwl_airflow
+                suffix: " m³/h"
+                style:
+                  top: 55%
+                  left: 52%
+                  font-size: 20px
+          
+        - type: glance
+          entities:
+            - entity: sensor.warmwasser
+              name: Warmwasser Heute
+            - entity: sensor.heizen
+              name: Heizung Heute
+            - entity: sensor.luxtronik_status
+              name: Modus
+          show_name: true
+          show_state: true
+          title: WP Betriebsstunden
+          
+        - type: glance
+          entities:
+            - entity: sensor.daily_energy_heizung
+              name: Heizung Heute
+            - entity: sensor.daily_energy_wasser
+              name: Wasser Heute
+            - entity: sensor.monthly_energy_heizung
+              name: Heizung Monat
+            - entity: sensor.monthly_energy_wasser
+              name: Wasser Monat
+          show_name: true
+          show_state: true
+          title: WP Leistungsdaten
+          
+        - type: entities
+          title: Besuchermodus
+          show_header_toggle: false
+          entities:
+            - type: section
+            - entity: automation.show_displays
+            
+      - type: vertical-stack
+        cards:
+          - type: custom:mini-graph-card
+            name: Airflow
+            icon: mdi:air-filter
+            height: 125
+            hours_to_show: 24
+            points_per_hour: 3
+            entities:
+              - entity: sensor.kwl_airflow
+                name: KWL Airflow
+            align_state: center
+            lower_bound: 55
+            upper_bound: 260
+            font_size_header: 20
+            hour24: true
+            unit: "m³/h"
+            show:
+              fill: false
+            color_thresholds:
+                - value: 20
+                  color: "#2F4858"
+                - value: 110
+                  color: "#33658A"
+                - value: 140
+                  color: "#86BBD8"
+                - value: 190
+                  color: "#F6AE2D"
+
+          - type: 'custom:simple-thermostat'
+            entity: climate.wohnbereich
+            modes:
+                null: false
+          - type: 'custom:simple-thermostat'
+            entity: climate.buro
+                
+      - type: vertical-stack
+        cards:
+          - type: 'custom:simple-thermostat'
+            entity: climate.schlafzimmer
+            modes:
+                null: false
+          - type: 'custom:simple-thermostat'
+            entity: climate.zimmer
+            modes:
+                null: false
+          - type: 'custom:simple-thermostat'
+            entity: climate.ankleide
+            modes:
+                null: false
+
+  - icon: mdi:window-closed
+    title: Raffstores
+    cards:
+      - type: vertical-stack
+        cards:
+      
+          - type: entities
+            title: Raffstores Gesamt
+            show_header_toggle: false
+            entities:
+              - type: section
+              - entity: cover.alle
+          
+          - type: glance
+            show_state: false
+            title: Lamellenstellung
+            entities:
+             - entity: cover.alle
+               tap_action: 
+                 action: call-service
+                 service: cover.set_cover_tilt_position
+                 service_data:
+                   entity_id: cover.alle
+                   tilt_position: '0'
+               name: Finster
+               icon: mdi:solid
+             - entity: cover.alle
+               tap_action:
+                 action: call-service
+                 service: cover.set_cover_tilt_position
+                 service_data:
+                   entity_id: cover.alle
+                   tilt_position: '35'
+               name: Luftig
+               icon: mdi:view-day
+             - entity: cover.alle
+               tap_action:
+                 action: call-service
+                 service: cover.set_cover_tilt_position
+                 service_data:
+                   entity_id: cover.alle
+                   tilt_position: '100'
+               name: Licht
+               icon: mdi:view-sequential
+            columns: 3
+            
+          - type: "custom:button-card"
+            entity: lock.gramat
+            name: Haustür
+            color: rgb(28, 128, 199)
+            show_state: true
+            state:
+              - value: "Locked"
+                color: var(--disabled-text-color)
+                icon: mdi:home-lock
+              - value: "Unlocked"
+                color: rgb(5, 147, 255)
+                icon: mdi:home-unlock
+          
+      - type: entities
+        title: Raffstores UG
+        show_header_toggle: false
+        entities:
+          - type: section
+          - entity: cover.technikraum
+          - type: custom:slider-entity-row
+            entity: cover.technikraum
+            full_row: true
+          - type: section
+          - entity: cover.bad_eg
+          - type: custom:slider-entity-row
+            entity: cover.bad_eg
+            full_row: true
+            
+          - type: section
+          - entity: cover.wohnzimmer
+          - type: custom:slider-entity-row
+            entity: cover.wohnzimmer
+            full_row: true
+
+          - type: section
+          - entity: cover.fixglas
+          - type: custom:slider-entity-row
+            entity: cover.fixglas
+            full_row: true
+
+          - type: section
+          - entity: cover.esszimmer
+          - type: custom:slider-entity-row
+            entity: cover.esszimmer
+            full_row: true
+
+          - type: section
+          - entity: cover.kuche
+          - type: custom:slider-entity-row
+            entity: cover.kuche
+            full_row: true
+            
+      - type: entities
+        title: Raffstores OG
+        show_header_toggle: false
+        entities:
+          - type: section
+          - entity: cover.ankleide
+          - type: custom:slider-entity-row
+            entity: cover.ankleide
+            full_row: true
+            
+          - type: section
+          - entity: cover.buro
+          - type: custom:slider-entity-row
+            entity: cover.buro
+            full_row: true
+          
+          - type: section
+          - entity: cover.bad_og
+          - type: custom:slider-entity-row
+            entity: cover.bad_og
+            full_row: true
+            
+          - type: section
+          - entity: cover.flur
+          - type: custom:slider-entity-row
+            entity: cover.flur
+            full_row: true
+            
+          - type: section
+          - entity: cover.zimmer
+          - type: custom:slider-entity-row
+            entity: cover.zimmer
+            full_row: true
+
+          - type: section
+          - entity: cover.schlaf
+          - type: custom:slider-entity-row
+            entity: cover.schlaf
+            full_row: true
+
+          - type: section
+          - entity: cover.wc
+          - type: custom:slider-entity-row
+            entity: cover.wc
+            full_row: true
+
+      - type: vertical-stack
+        cards:
+            
+          - type: entity-filter
+            card:
+              type: glance
+              title: Fenster Offen
+              show_state: false
+            entities:
+              - binary_sensor.ankleide
+              - binary_sensor.bad_eg
+              - binary_sensor.bad_og
+              - binary_sensor.buro
+              - binary_sensor.esszimmer
+              - binary_sensor.flur_og
+              - binary_sensor.hausture
+              - binary_sensor.kuche
+              - binary_sensor.schlafzimmer
+              - binary_sensor.technikraum
+              - binary_sensor.wc_og
+              - binary_sensor.wohnzimmer
+              - binary_sensor.zimmer
+            state_filter:
+              - "on"
+
+          - type: entity-filter
+            card:
+              type: glance
+              title: RWM Alarm
+              show_state: false
+            entities:
+              - binary_sensor.rwm_technik
+              - binary_sensor.rwm_flur_eg
+              - binary_sensor.rwm_abstellraum
+              - binary_sensor.rwm_wohnzimmer
+              - binary_sensor.rwm_ankleide
+              - binary_sensor.rwm_schlaf
+              - binary_sensor.rwm_zimmer
+              - binary_sensor.rwm_buro
+              - binary_sensor.rwm_flur_og
+            state_filter:
+              - "on"
+
+          - type: alarm-panel
+            entity: alarm_control_panel.home_alarm
+          
+  - icon: mdi:animation-play-outline
+    title: Media
+    cards:
+      - type: custom:mini-media-player
+        entity: media_player.living_room
+        name: Sonos Küche
+        artwork: cover
+        power_color: true
+        show_progress: true
+        volume_stateless: true
+        scale: 1.1
+        icon: mdi:speaker
+        
+      - type: custom:mini-media-player
+        entity: media_player.buro
+        name: Sonos Büro
+        artwork: cover
+        power_color: true
+        show_progress: true
+        volume_stateless: true
+        scale: 1.1
+        icon: mdi:speaker
+       
+      - type: custom:mini-media-player
+        entity: media_player.moe_s_chromecast
+        name: Chromecast
+        artwork: cover
+        power_color: true
+        show_progress: true
+        shortcuts:
+            columns: 2 # Max buttons per row
+            buttons:
+              # Start predefined playlist
+              - icon: mdi:cat
+                name: ORF 1
+                type: tvshow
+                id: https://orf1.cdn.ors.at/out/u/orf1/q8c/manifest
+              - icon: mdi:cat
+                name: ORF 2
+                type: tvshow
+                id: https://orf2.cdn.ors.at/out/u/orf2/q8c/manifest.m3u8
+              - icon: mdi:dog
+                name: Sport Plus
+                type: tvshow
+                id: https://orfs.mdn.ors.at/out/u/orfs/q8c/manifest.m3u8
+              - icon: mdi:dog
+                name: Servus TV
+                type: tvshow
+                id: https://rbmn-live.akamaized.net/hls/live/2002825/geoSTVATmob/master.m3u8
+           
+  - title: Beregnung
+    icon: 'mdi:water-pump'
+    cards:
+      - type: entities
+        show_header_toggle: false
+        title: Program Wiese
+        entities:
+          - input_boolean.retic_program1_enable
+          - script.retic_program1_run
+          - input_datetime.retic_program1_start_time_1
+          - input_datetime.retic_program1_start_time_2
+          - group.retic_program1_watering_days
+          - group.retic_program1_run_times
+      - type: entities
+        show_header_toggle: false
+        title: Program Blumenwiese
+        entities:
+          - input_boolean.retic_program2_enable
+          - script.retic_program2_run
+          - input_datetime.retic_program2_start_time_1
+          - input_datetime.retic_program2_start_time_2
+          - group.retic_program2_watering_days
+          - group.retic_program2_run_times
+      - type: entities
+        show_header_toggle: false
+        title: Program Blumen
+        entities:
+          - input_boolean.retic_program3_enable
+          - script.retic_program3_run
+          - input_datetime.retic_program3_start_time_1
+          - group.retic_program3_watering_days
+          - group.retic_program3_run_times
+      - type: entities
+        show_header_toggle: false
+        title: Manual Control
+        entities:
+          - input_boolean.retic_station_1_run
+          - input_boolean.retic_station_2_run
+          - input_boolean.retic_station_3_run
+      - type: entities
+        title: Rain Settings
+        entities:
+          - input_number.allowable_rain_percentage
+          - input_number.allowable_rain_quantity
+          - input_boolean.retic_rain_parameters_met
+          - input_boolean.retic_rain_override
+        show_header_toggle: false
+      - type: glance
+        show_state: false
+        title: Status
+        entities:
+          - entity: switch.wasser1
+            name: Wiese
+            icon: mdi:water
+          - entity: switch.wasser2
+            name: Blumenwiese
+            icon: mdi:water
+          - entity: switch.wasser3
+            name: Blumen
+            icon: mdi:water
+
+  - icon: mdi:cctv
+    title: Kameras
+    cards:
+      - type: picture-glance
+        title: Garten
+        entities: []
+        camera_image: camera.garten
+        camera_view: live      
+        
+      - type: picture-glance
+        title: Garage
+        entities: []
+        camera_image: camera.garage
+        camera_view: live  
+        
+      - type: picture-glance
+        title: Vorne
+        entities: []
+        camera_image: camera.vorne
+        camera_view: live  
+            
+
+  - icon: mdi:chart-areaspline
+    title: Stats
+    cards:
+      - type: iframe
+        url: 'http://192.168.1.7:3000/d-solo/w7vbNRxZz/home-assistant?tab=visualization&orgId=1&panelId=4" width="450" height="200" frameborder="0"'
+        aspect_ratio: 50%
+        
+      - type: iframe
+        url: 'http://192.168.1.7:3000/d-solo/w7vbNRxZz/home-assistant?orgId=1&panelId=2" width="450" height="200" frameborder="0"'
+        aspect_ratio: 50%
+        
+      - type: iframe
+        url: 'http://192.168.1.7:3000/d-solo/w7vbNRxZz/home-assistant?tab=visualization&panelId=6&orgId=1" width="450" height="200" frameborder="0"'
+        aspect_ratio: 50%
+        
+      - type: iframe
+        url: 'http://192.168.1.7:3000/d-solo/w7vbNRxZz/home-assistant?tab=visualization&panelId=8&orgId=1" width="450" height="200" frameborder="0"'
+        aspect_ratio: 50%

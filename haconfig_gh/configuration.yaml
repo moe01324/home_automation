@@ -1,0 +1,209 @@
+homeassistant:
+  name: !secret name
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: metric
+  time_zone: Europe/Vienna
+  customize: !include customize.yaml
+  packages: !include_dir_named knx
+
+api:
+
+knx:
+  expose:
+    - type: 'time'
+      address: '0/1/40'
+
+
+
+# Enables the frontend
+frontend:
+  javascript_version: latest
+  themes: !include_dir_merge_named themes
+
+favicon:
+  title: title
+  icon_path: /local/favicons/
+
+system_log:
+  max_entries: 1000
+  
+mobile_app:
+    
+spotify:
+  client_id: !secret spotifyclientid
+  client_secret: !secret spotifyclientsecret
+  
+google:
+  client_id: !secret google_client_id
+  client_secret: !secret google_client_secret
+  
+alarm_control_panel:
+  - platform: manual
+    name: Home Alarm
+    code: !secret alarmcode
+    pending_time: 20
+    delay_time: 1
+    trigger_time: 60
+    
+influxdb:
+  include:
+    entities:
+       - sensor.aussentemperatur
+       - sensor.helligkeit_sud
+       - sensor.kwl_airflow
+       - sensor.kwl_luftfeuchtigkeit_outdoor
+       - sensor.kwl_luftfeuchtigkeit_extract
+       - luxtronik.betriebsstunden_heizung
+       - luxtronik.betriebsstunden_verdichter_1
+       - luxtronik.betriebsstunden_warmwasser
+       - luxtronik.betriebsstunden_wp
+       - luxtronik.betriebsstunden_zwe
+       - luxtronik.betriebszustand
+       - luxtronik.temperatur_rucklauf
+       - luxtronik.temperatur_rucklauf_soll
+       - luxtronik.temperatur_vorlauf
+       - luxtronik.warmemengenzahler_brauchwasser
+       - luxtronik.warmemengenzahler_gesamt
+       - luxtronik.warmemengenzahler_heizung
+       - luxtronik.warmwasser_ist_temperatur
+       - luxtronik.warmwasser_soll_temp
+       - sensor.wind
+       - sensor.daily_energy_heizung
+       - sensor.daily_energy_wasser
+       - sensor.monthly_energy_heizung
+       - sensor.monthly_energy_wasser
+       - sensor.innen_temp
+
+#mqtt:
+# broker: 192.168.1.7
+#port: 1884
+#client_id: HomeAssistant
+
+system_health:
+
+config:
+
+recorder:
+  purge_keep_days: 7
+
+lovelace:
+  mode: yaml
+
+camera:   
+  - platform: foscam
+    ip: 192.168.1.119
+    port: 88
+    username: !secret foscamgartenuser
+    password: !secret foscamgartenpwd
+    name: garten
+    
+  - platform: foscam
+    ip: 192.168.1.116
+    port: 88
+    username: !secret foscamtoruser
+    password: !secret foscamtorpwd
+    name: garage
+    
+  - platform: generic
+  - platform: generic
+    name: vorne
+    username: !secret hikuser
+    password: !secret hikpwd
+    authentication: digest
+
+logbook:
+  exclude:
+    domains:
+      - updater
+      - media_player
+    entities:
+      - sensor.time
+      
+utility_meter:
+  daily_energy_heizung:
+    source: luxtronik.warmemengenzahler_heizung
+    cycle: daily
+  monthly_energy_heizung:
+    source: luxtronik.warmemengenzahler_heizung
+    cycle: monthly
+  daily_energy_wasser:
+    source: luxtronik.warmemengenzahler_brauchwasser
+    cycle: daily
+  monthly_energy_wasser:
+    source: luxtronik.warmemengenzahler_brauchwasser
+    cycle: monthly
+
+# Discover some devices automatically
+discovery:
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky
+    units: si
+    mode: daily
+    name: Wetter
+    
+sensor:
+  - platform: darksky
+    api_key: !secret darksky
+    forecast:
+      - 2
+    monitored_conditions:
+      - precip_intensity
+      - precip_probability
+##      - sunrise_time
+
+# Enables support for tracking state changes over time
+history:
+  exclude:
+    domains:
+      - updater
+      - media_player
+    entities:
+      - sensor.time
+
+# Track the sun
+sun:
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://192.168.1.7:3218
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+luxtronik:
+  host: "192.168.1.53"
+  port: 8889
+
+lock:
+  - platform: nuki
+    host: 192.168.1.11
+    token: !secret nuki
+
+# Example configuration.yaml entry for the Telegram Bot
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegramapikey
+    allowed_chat_ids:
+      - !secret telegramchatid1
+      - !secret telegramchatid2
+      - !secret telegramchatid3
+
+# Example configuration.yaml entry for the notifier
+notify:
+  - name: Notify
+    platform: telegram
+    chat_id: !secret telegramchatid1
+    
+      

@@ -1,0 +1,525 @@
+
+      
+sensor:
+  - platform: template    # determine if today is selected as a watering day for program 1
+    sensors:
+      retic_program1_watering_day:
+        entity_id: input_boolean.retic_program1_monday, input_boolean.retic_program1_tuesday, input_boolean.retic_program1_wednesday, input_boolean.retic_program1_thursday, input_boolean.retic_program1_friday, input_boolean.retic_program1_saturday, input_boolean.retic_program1_sunday, sensor.time
+        value_template:  >
+          {% set sensor_names = [ 'monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'] %}
+          {% set today_name = sensor_names[now().weekday()] %}
+          {% set entity_id = 'input_boolean.retic_program1_'+today_name %}
+          {{ is_state(entity_id, 'on') }}
+
+      retic_program2_watering_day:
+        entity_id: input_boolean.retic_program2_monday, input_boolean.retic_program2_tuesday, input_boolean.retic_program2_wednesday, input_boolean.retic_program2_thursday, input_boolean.retic_program2_friday, input_boolean.retic_program2_saturday, input_boolean.retic_program2_sunday, sensor.time
+        value_template:  >
+          {% set sensor_names = [ 'monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'] %}
+          {% set today_name = sensor_names[now().weekday()] %}
+          {% set entity_id = 'input_boolean.retic_program2_'+today_name %}
+          {{ is_state(entity_id, 'on') }}
+
+      retic_program3_watering_day:
+        entity_id: input_boolean.retic_program3_monday, input_boolean.retic_program3_tuesday, input_boolean.retic_program3_wednesday, input_boolean.retic_program3_thursday, input_boolean.retic_program3_friday, input_boolean.retic_program3_saturday, input_boolean.retic_program3_sunday, sensor.time
+        value_template:  >
+          {% set sensor_names = [ 'monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'] %}
+          {% set today_name = sensor_names[now().weekday()] %}
+          {% set entity_id = 'input_boolean.retic_program3_'+today_name %}
+          {{ is_state(entity_id, 'on') }}
+    
+input_datetime:
+  retic_program1_start_time_1:    # program start time control
+    name: Wiese Start Time
+    has_date: false
+    has_time: true
+
+  retic_program1_start_time_2:
+    name: Blumenwiese Start Time
+    has_date: false
+    has_time: true
+
+  retic_program2_start_time_1:
+    name: Wiese Start Time
+    has_date: false
+    has_time: true
+
+  retic_program2_start_time_2:
+    name: Blumenwiese Start Time
+    has_date: false
+    has_time: true
+    
+  retic_program3_start_time_1:
+    name: Blumen Start Time
+    has_date: false
+    has_time: true
+
+input_number:
+  retic_program1_station1_run_time:   # station run time control
+    name: Wiese Run Time
+    min: 0
+    max: 30
+    step: 1
+    icon: mdi:camera-timer
+
+  retic_program1_station2_run_time:
+    name: Blumenwiese Run Time
+    min: 0
+    max: 30
+    step: 1
+    icon: mdi:camera-timer
+
+  retic_program2_station1_run_time:
+    name: Wiese Run Time
+    min: 0
+    max: 30
+    step: 1
+    icon: mdi:camera-timer
+
+  retic_program2_station2_run_time:
+    name: Blumenwiese Run Time
+    min: 0
+    max: 30
+    step: 1
+    icon: mdi:camera-timer  
+    
+  retic_program3_station1_run_time:
+    name: Blumen Run Time
+    min: 0
+    max: 30
+    step: 1
+    icon: mdi:camera-timer  
+
+  allowable_rain_quantity:
+    name: 'Allowable Rain (mm)'
+    min: 0
+    max: 5
+    step: 0.1
+    icon: mdi:cup-water
+
+  allowable_rain_percentage:
+    name: 'Allowable Rain (%)'
+    min: 0
+    max: 100
+    step: 1
+    icon: mdi:water-percent
+
+input_boolean:
+  retic_program1_monday:   # watering day selections for program 1
+    name: Monday
+
+  retic_program1_tuesday:
+    name: Tuesday
+
+  retic_program1_wednesday:
+    name: Wednesday
+
+  retic_program1_thursday:
+    name: Thursday
+    
+  retic_program1_friday:
+    name: Friday
+
+  retic_program1_saturday:
+    name: Saturday
+    
+  retic_program1_sunday:
+    name: Sunday
+
+  retic_program2_monday:   # watering day selections for program 2
+    name: Monday
+
+  retic_program2_tuesday:
+    name: Tuesday
+
+  retic_program2_wednesday:
+    name: Wednesday
+
+  retic_program2_thursday:
+    name: Thursday
+    
+  retic_program2_friday:
+    name: Friday
+
+  retic_program2_saturday:
+    name: Saturday
+    
+  retic_program2_sunday:
+    name: Sunday
+    
+  retic_program3_monday:   # watering day selections for program 3
+    name: Monday
+
+  retic_program3_tuesday:
+    name: Tuesday
+
+  retic_program3_wednesday:
+    name: Wednesday
+
+  retic_program3_thursday:
+    name: Thursday
+    
+  retic_program3_friday:
+    name: Friday
+
+  retic_program3_saturday:
+    name: Saturday
+    
+  retic_program3_sunday:
+    name: Sunday
+
+
+  retic_program1_enable:   # enable program to run
+    name: Enable
+    
+  retic_program2_enable:
+    name: Enable
+    
+  retic_program3_enable:
+    name: Enable
+
+
+  retic_station_1_run:
+    name: Wiese Run
+  
+  retic_station_2_run:
+    name: Blumenwiese Run
+    
+  retic_station_3_run:
+    name: Blumen Run
+
+
+  retic_rain_parameters_met:   # set to ON if rain today values are below levels set in input_numbers
+    name: Rain Parameters Met
+    icon: mdi:water
+  retic_rain_override:         # set to ON to run retic even if rain parameters are not met
+    name: Rain Override
+    icon: mdi:water
+
+group:                  # frontend interface setup
+  retic_manual:
+    name: 'Manual Control'
+    entities:
+      - switch.wasser1
+      - switch.wasser2
+      - switch.wasser3
+  
+  retic_program1:
+    name: 'Wiese'
+    entities:
+      - input_boolean.retic_program1_enable
+      - script.retic_program1_run
+      - input_datetime.retic_program1_start_time_1
+      - group.retic_program1_watering_days
+      - group.retic_program1_run_times
+    
+  retic_program2:
+    name: 'Blumenwiese'
+    entities:
+      - input_boolean.retic_program2_enable
+      - script.retic_program2_run
+      - input_datetime.retic_program2_start_time_1
+      - group.retic_program2_watering_days
+      - group.retic_program2_run_times
+      
+  retic_program3:
+    name: 'Blumen'
+    entities:
+      - input_boolean.retic_program3_enable
+      - script.retic_program3_run
+      - input_datetime.retic_program3_start_time_1
+      - group.retic_program3_watering_days
+      - group.retic_program3_run_times
+
+  retic_program1_watering_days:
+    name: 'Watering days Wiese'
+    icon: mdi:calendar-multiple-check
+    entities:
+      - input_boolean.retic_program1_monday
+      - input_boolean.retic_program1_tuesday
+      - input_boolean.retic_program1_wednesday
+      - input_boolean.retic_program1_thursday
+      - input_boolean.retic_program1_friday
+      - input_boolean.retic_program1_saturday
+      - input_boolean.retic_program1_sunday
+
+  retic_program2_watering_days:
+    name: 'Watering days Blumenwiese'
+    icon: mdi:calendar-multiple-check
+    entities:
+      - input_boolean.retic_program2_monday
+      - input_boolean.retic_program2_tuesday
+      - input_boolean.retic_program2_wednesday
+      - input_boolean.retic_program2_thursday
+      - input_boolean.retic_program2_friday
+      - input_boolean.retic_program2_saturday
+      - input_boolean.retic_program2_sunday
+      
+  retic_program3_watering_days:
+    name: 'Watering days Blumen'
+    icon: mdi:calendar-multiple-check
+    entities:
+      - input_boolean.retic_program3_monday
+      - input_boolean.retic_program3_tuesday
+      - input_boolean.retic_program3_wednesday
+      - input_boolean.retic_program3_thursday
+      - input_boolean.retic_program3_friday
+      - input_boolean.retic_program3_saturday
+      - input_boolean.retic_program3_sunday
+
+  retic_program1_run_times:
+    name: 'Run times'
+    icon: mdi:camera-timer
+    entities:
+      - input_number.retic_program1_station1_run_time
+      - input_number.retic_program1_station2_run_time
+
+  retic_program2_run_times:
+    name: 'Run times'
+    icon: mdi:camera-timer
+    entities:
+      - input_number.retic_program2_station1_run_time
+      - input_number.retic_program2_station2_run_time
+      
+  retic_program3_run_times:
+    name: 'Run times'
+    icon: mdi:camera-timer
+    entities:
+      - input_number.retic_program3_station1_run_time
+
+
+automation:
+  - alias: Check rain parameters     # check that todays rain doesnt need to disable the retic from running
+    initial_state: 'on'
+    trigger:
+      - platform: template
+        value_template: "{{ states('sensor.time') == ((states.input_datetime.retic_program1_start_time_1.attributes.timestamp - 600) | int | timestamp_custom('%H:%M', False)) }}"
+      - platform: template
+        value_template: "{{ states('sensor.time') == ((states.input_datetime.retic_program1_start_time_2.attributes.timestamp - 600) | int | timestamp_custom('%H:%M', False)) }}"
+      - platform: template
+        value_template: "{{ states('sensor.time') == ((states.input_datetime.retic_program2_start_time_1.attributes.timestamp - 600) | int | timestamp_custom('%H:%M', False)) }}"
+      - platform: template
+        value_template: "{{ states('sensor.time') == ((states.input_datetime.retic_program2_start_time_2.attributes.timestamp - 600) | int | timestamp_custom('%H:%M', False)) }}"
+      - platform: state
+        entity_id: input_number.allowable_rain_quantity
+      - platform: state
+        entity_id: input_number.allowable_rain_percentage
+
+    action:
+      - service_template: >
+          input_boolean.turn_{{'on' if states('sensor.bom_perth_rain_today') <= states('input_number.allowable_rain_quantity') and 
+                                       states('sensor.bom_perth_forecast_chance_of_rain_0') <= states('input_number.allowable_rain_percentage')  else 'off'}}
+        entity_id: input_boolean.retic_rain_parameters_met
+
+
+
+  - alias: Reticulation Run Program 1     # start program 1 at designated time if it is enabled and today is selected as a watering day
+    initial_state: 'on'
+    trigger:
+      - platform: template
+        value_template: "{{ states('sensor.time') == (states.input_datetime.retic_program1_start_time_1.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
+      - platform: template
+        value_template: "{{ states('sensor.time') == (states.input_datetime.retic_program1_start_time_2.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.retic_program1_enable
+          state: 'on'
+        - condition: state
+          entity_id: sensor.retic_program1_watering_day
+          state: 'True'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: input_boolean.retic_rain_parameters_met
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.retic_rain_override
+              state: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.retic_program1_run
+
+  - alias: Reticulation Run Program 2     # start program 2 at designated time if it is enabled and today is selected as a watering day
+    initial_state: 'on'
+    trigger:
+      - platform: template
+        value_template: "{{ states('sensor.time') == (states.input_datetime.retic_program2_start_time_1.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
+      - platform: template
+        value_template: "{{ states('sensor.time') == (states.input_datetime.retic_program2_start_time_2.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.retic_program2_enable
+          state: 'on'
+        - condition: state
+          entity_id: sensor.retic_program2_watering_day
+          state: 'True'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: input_boolean.retic_rain_parameters_met
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.retic_rain_override
+              state: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.retic_program2_run
+        
+  - alias: Reticulation Run Program 3     # start program 2 at designated time if it is enabled and today is selected as a watering day
+    initial_state: 'on'
+    trigger:
+      - platform: template
+        value_template: "{{ states('sensor.time') == (states.input_datetime.retic_program3_start_time_1.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.retic_program3_enable
+          state: 'on'
+        - condition: state
+          entity_id: sensor.retic_program3_watering_day
+          state: 'True'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: input_boolean.retic_rain_parameters_met
+              state: 'on'
+            - condition: state
+              entity_id: input_boolean.retic_rain_override
+              state: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.retic_program3_run
+
+  - alias: Reticulation Station 1 Run
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: input_boolean.retic_station_1_run
+    action:
+      - service_template: >
+          {% if is_state('input_boolean.retic_station_1_run', 'on') %}
+            script.retic_station_1_run
+          {% else %}
+            script.retic_station_1_stop
+          {% endif %}
+      
+  - alias: Reticulation Station 2 Run
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: input_boolean.retic_station_2_run
+    action:
+      - service_template: >
+          {% if is_state('input_boolean.retic_station_2_run', 'on') %}
+            script.retic_station_2_run
+          {% else %}
+            script.retic_station_2_stop
+          {% endif %}
+          
+  - alias: Reticulation Station 3 Run
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: input_boolean.retic_station_3_run
+    action:
+      - service_template: >
+          {% if is_state('input_boolean.retic_station_3_run', 'on') %}
+            script.retic_station_3_run
+          {% else %}
+            script.retic_station_3_stop
+          {% endif %}
+
+script:
+  retic_program1_run:             #run retic program 1 through each station for selected time
+    alias: Program 1 Run
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.wasser1
+      - delay: "00:{{ states('input_number.retic_program1_station1_run_time')|int }}:00"
+      - service: switch.turn_off
+        data:
+          entity_id: switch.wasser1
+      - service: switch.turn_on
+        data:
+          entity_id: switch.wasser2
+      - delay: "00:{{ states('input_number.retic_program1_station2_run_time')|int }}:00"
+      - service: switch.turn_off
+        data:
+          entity_id: switch.wasser2
+      
+  retic_program2_run:             #run retic program 2 through each station for selected time
+    alias: Program 2 Run
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.wasser1
+      - delay: "00:{{ states('input_number.retic_program2_station1_run_time')|int }}:00"
+      - service: switch.turn_off
+        data:
+          entity_id: switch.wasser1
+      - service: switch.turn_on
+        data:
+          entity_id: switch.wasser2
+      - delay: "00:{{ states('input_number.retic_program2_station2_run_time')|int }}:00"
+      - service: switch.turn_off
+        data:
+          entity_id: switch.wasser2
+          
+          
+  retic_program3_run:             #run retic program 3 through each station for selected time
+    alias: Program 3 Run
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.wasser3
+      - delay: "00:{{ states('input_number.retic_program3_station1_run_time')|int }}:00"
+      - service: switch.turn_off
+        data:
+          entity_id: switch.wasser3
+
+  retic_station_1_run:
+    alias: Station 1 Run
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.wasser1
+  
+  retic_station_1_stop:
+    alias: Station 1 Stop
+    sequence:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.wasser1
+
+  retic_station_2_run:
+    alias: Station 2 Run
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.wasser2
+  
+  retic_station_2_stop:
+    alias: Station 2 Stop
+    sequence:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.wasser2
+          
+  retic_station_3_run:
+    alias: Station 3 Run
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.wasser3
+  
+  retic_station_3_stop:
+    alias: Station 3 Stop
+    sequence:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.wasser3

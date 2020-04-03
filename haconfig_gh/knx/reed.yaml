@@ -1,0 +1,120 @@
+binary_sensor:
+  - platform: knx
+    state_address: '7/0/15'
+    name: Fenster Offen
+    device_class: 'window'
+    
+  - platform: knx
+    state_address: '7/0/17'
+    name: RWM Alarm
+    device_class: 'smoke'    
+
+  - platform: knx
+    state_address: '7/0/0'
+    name: Technikraum
+    device_class: 'window'
+    
+  - platform: knx
+    state_address: '7/0/1'
+    name: Bad EG
+    device_class: 'window'
+
+  - platform: knx
+    state_address: '7/0/2'
+    name: Haustüre
+    device_class: 'window'
+
+  - platform: knx
+    state_address: '7/0/3'
+    name: Wohnzimmer
+    device_class: 'window'
+    
+  - platform: knx
+    state_address: '7/0/4'
+    name: Esszimmer
+    device_class: 'window'
+    
+  - platform: knx
+    state_address: '7/0/5'
+    name: Küche
+    device_class: 'window'
+
+  - platform: knx
+    state_address: '7/0/6'
+    name: Flur OG
+    device_class: 'window'
+
+  - platform: knx
+    state_address: '7/0/7'
+    name: WC OG
+    device_class: 'window'
+
+  - platform: knx
+    state_address: '7/0/8'
+    name: Bad OG
+    device_class: 'window'
+
+  - platform: knx
+    state_address: '7/0/9'
+    name: Büro
+    device_class: 'window'
+
+  - platform: knx
+    state_address: '7/0/10'
+    name: Zimmer
+    device_class: 'window'
+
+  - platform: knx
+    state_address: '7/0/11'
+    name: Ankleide
+    device_class: 'window'
+
+  - platform: knx
+    state_address: '7/0/12'
+    name: Schlafzimmer
+    device_class: 'window'
+    
+  - platform: knx
+    state_address: '7/1/0'
+    name: RWM Technik
+    device_class: 'smoke'
+
+  - platform: knx
+    state_address: '7/1/1'
+    name: RWM Flur EG
+    device_class: 'smoke'
+
+  - platform: knx
+    state_address: '7/1/2'
+    name: RWM Abstellraum
+    device_class: 'smoke'
+    
+  - platform: knx
+    state_address: '7/1/3'
+    name: RWM Wohnzimmer
+    device_class: 'smoke'
+    
+  - platform: knx
+    state_address: '7/1/5'
+    name: RWM Ankleide
+    device_class: 'smoke'
+    
+  - platform: knx
+    state_address: '7/1/4'
+    name: RWM Schlaf
+    device_class: 'smoke'
+    
+  - platform: knx
+    state_address: '7/1/6'
+    name: RWM Zimmer
+    device_class: 'smoke'
+    
+  - platform: knx
+    state_address: '7/1/7'
+    name: RWM Büro  
+    device_class: 'smoke'
+    
+  - platform: knx
+    state_address: '7/1/8'
+    name: RWM Flur OG
+    device_class: 'smoke'

@@ -1,0 +1,775 @@
+## Licht Flur EG Einschalten
+- alias: LichtFlurBeiTueröffnunf
+  trigger:
+  - entity_id: binary_sensor.hausture
+    platform: state
+    to: 'on'
+  condition:
+    condition: or  # 'when dark' condition: either after sunset or before sunrise - equivalent to a state condition on `sun.sun` of `below_horizon`
+    conditions:
+      - condition: sun
+        after: sunset
+      - condition: sun
+        before: sunrise
+  action:
+  - data:
+      entity_id: light.flur_eg
+    service: light.turn_on
+
+## BWM EG Nachts deaktivieren
+- alias: BwmEGDeaktivieren
+  trigger:
+    at: '22:30:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: switch.pm_sperre_flur_eg, switch.pm_sperre_wohnzimmer, switch.pm_sperre_kuche
+    service: switch.turn_on
+## BWM EG Aktivieren
+- alias: BwmEGDeaktivieren
+  trigger:
+    at: '06:00:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: switch.pm_sperre_flur_eg, switch.pm_sperre_wohnzimmer, switch.pm_sperre_kuche
+    service: switch.turn_off
+## Kaffeemaschine einschalten Früh WE
+- alias: Kaffee On WE
+  trigger:
+  - at: 07:00:00
+    platform: time
+  condition:
+    condition: time
+    weekday:
+      - sat
+      - sun
+  action:
+  - data:
+      entity_id: switch.kaffeemaschine
+    service: switch.turn_on
+## Kaffee ausschalten Früh
+- alias: Kaffee Off WE
+  trigger:
+  - at: 07:30:00
+    platform: time
+  condition:
+    condition: time
+    weekday:
+      - sat
+      - sun
+  action:
+  - data:
+      entity_id: switch.kaffeemaschine
+    service: switch.turn_off
+## Kaffeemaschine einschalten Früh Normal
+- alias: Kaffee On
+  trigger:
+  - at: 06:00:00
+    platform: time
+  condition:
+    condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+  - data:
+      entity_id: switch.kaffeemaschine
+    service: switch.turn_on
+## Kaffee ausschalten Früh
+- alias: Kaffee Off
+  trigger:
+  - at: 06:30:00
+    platform: time
+  condition:
+    condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+  - data:
+      entity_id: switch.kaffeemaschine
+    service: switch.turn_off
+## Offene Fenster checken
+- alias: Tür versperrt, aber Fenster ist offen.
+  trigger:
+  - entity_id: lock.lock
+    platform: state
+    to: locked
+  condition:
+  - condition: state
+    entity_id: binary_sensor.fenster_offen
+    state: 'on'
+  action:
+  - data:
+      message: Tür versperrt, aber ein Fenster ist offen!
+    service: telegram_bot.send_message
+## RWM Alarm
+- id: RWM Alarm
+  alias: RWM Alarm
+  trigger:
+  - entity_id: binary_sensor.rwm_alarm
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: RWM Alarm!
+    service: telegram_bot.send_message
+  - data: {}
+    service: script.rwmalarm
+## Raffstore im Bad runter
+- alias: BadRaffstoresSchliesse
+  trigger:
+    at: '21:30:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: cover.bad_og
+    service: cover.close_cover
+## Raffstores in der Früh öffnen
+- alias: Raffstores Früh Öffnen
+  trigger:
+    at: '06:00:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: cover.alle
+      tilt_position: '70'
+    service: cover.set_cover_tilt_position
+## Lüftung am Vormittag ausschalten
+- alias: Lüftung ausschalten
+  trigger:
+    at: '08:00:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: switch.kwl_stufe_1
+    service: switch.turn_on
+## Lüftung am Nachmittag einschalten
+- alias: Lüftung einschalten
+  trigger:
+    at: '17:20:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: switch.kwl_stufe_2
+    service: switch.turn_on
+## Lüftung am Abend ausschalten    
+- alias: Lüftung Abend ausschalten
+  trigger:
+    at: '22:00:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: switch.kwl_stufe_1
+    service: switch.turn_on
+## Tür zusperren am Abend
+- alias: Tür zusperren um 22:00
+  trigger:
+  - at: '22:00'
+    platform: time
+  condition:
+  - condition: state
+    entity_id: lock.lock
+    state: unlocked
+  action:
+  - data:
+      entity_id: lock.lock
+    service: lock.lock
+## Besuchermode Displays
+- alias: Show Displays
+  trigger:
+    platform: time_pattern
+    seconds: /15
+  condition: []
+  action:
+  - data:
+      address: 0/0/25
+      payload: '1'
+    service: knx.send
+## Kaffeemaschine via Telegram
+- alias: Kaffee via Telegram2
+  trigger:
+  - event_data:
+      command: /kaffee
+    event_type: telegram_command
+    platform: event
+  - event_data:
+      command: /k
+    event_type: telegram_command
+    platform: event
+  condition: []
+  action:
+  - service: notify.notify
+    data:
+      message: 'Kaffeemaschine: '
+      data:
+        inline_keyboard:
+        - Einschalten:/Kaffee_Einschalten, Ausschalten:/Kaffee_Ausschalten
+- alias: Kaffee via Telegram On
+  trigger:
+  - event_data:
+      data: /Kaffee_Einschalten
+    event_type: telegram_callback
+    platform: event
+  condition: []
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      show_alert: false
+      message: Kaffeemaschine eingeschalten
+  - data:
+      entity_id: switch.kaffeemaschine
+    service: switch.turn_on
+  - data:
+      message: 'Kaffeemaschine ist: {{ states(''switch.kaffeemaschine'') }}'
+    service: telegram_bot.send_message
+- alias: Kaffee via Telegram Off
+  trigger:
+  - event_data:
+      data: /Kaffee_Ausschalten
+    event_type: telegram_callback
+    platform: event
+  condition: []
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      show_alert: false
+      message: Kaffeemaschine ausgeschalten
+  - data:
+      entity_id: switch.kaffeemaschine
+    service: switch.turn_off
+  - data:
+      message: 'Kaffeemaschine ist: {{ states(''switch.kaffeemaschine'') }}'
+    service: telegram_bot.send_message
+##Alarmanlage
+- alias: Trigger alarm while armed away
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.alarm_ankleide
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_bad_eg
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_bad_og
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_buro
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_essbereich
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_flur_eg
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_flur_og
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_schlafzimmer
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_schlafzimmer_2
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_stiege
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_wc_og
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_wohnzimmer
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.alarm_zimmer
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.fenster_offen
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.home_alarm
+    state: armed_away
+  action:
+    service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.home_alarm
+- alias: Send notification when alarm triggered
+  trigger:
+  - entity_id: alarm_control_panel.home_alarm
+    platform: state
+    to: triggered
+  action:
+  - data:
+      message: ALARM! The alarm has been triggered
+    service: notify.notify
+  - data: {}
+    service: script.lightson
+  - data:
+      entity_id: cover.alle
+    service: cover.open_cover
+  - data: {}
+    service: script.bwmalarm
+- alias: Send knx state when alarm is pending
+  initial_state: 'on'
+  trigger:
+  - platform: state
+    entity_id: alarm_control_panel.home_alarm
+    to: pending
+  action:
+  - data:
+      address: 7/2/15
+      payload: '1'
+    service: knx.send
+- alias: Send knx state when alarm is disarmed
+  initial_state: 'on'
+  trigger:
+  - platform: state
+    entity_id: alarm_control_panel.home_alarm
+    to: disarmed
+  action:
+  - data:
+      address: 7/2/15
+      payload: '0'
+    service: knx.send
+- alias: Arm alarm when button pressed
+  trigger:
+  - platform: state
+    entity_id: switch.alarm_status
+    to: 'on'
+  action:
+  - service: alarm_control_panel.alarm_arm_away
+    data:
+      entity_id: alarm_control_panel.home_alarm
+      code: 
+- alias: Disarm alarm by switch
+  trigger:
+  - platform: state
+    entity_id: switch.alarm_status
+    to: 'off'
+  action:
+  - service: alarm_control_panel.alarm_disarm
+    data:
+      entity_id: alarm_control_panel.home_alarm
+      code: 
+## Nuki deaktiviert Alarm
+- alias: Deaktiviere Alarm via Nuki
+  trigger:
+  - entity_id: lock.lock
+    platform: state
+    to: unlocked
+  action:
+  - service: alarm_control_panel.alarm_disarm
+    data:
+      entity_id: alarm_control_panel.home_alarm
+      code: 
+## Raffstores zu wenn zu warm
+- alias: Raffstores Sonne Zu
+  trigger:
+  - at: 06:35
+    platform: time
+  condition:
+  - condition: template
+    value_template: '{{ state_attr(''climate.wohnbereich'', ''current_temperature'')
+      > 20}}'
+  - above: '7000'
+    condition: numeric_state
+    entity_id: sensor.helligkeit_sud
+  action:
+  - service: cover.close_cover
+    data:
+      entity_id: cover.sonne
+## Raffstores auf in der Früh für Banane
+- alias: Raffstores Auf Fruh
+  trigger:
+  - at: 06:30
+    platform: time
+  condition:
+  - above: '100'
+    condition: numeric_state
+    entity_id: sensor.helligkeit_sud
+  action:
+  - service: cover.open_cover
+    data:
+      entity_id: cover.esszimmer
+## Ventilator in der Nacht ausschalten
+- alias: Ventilator Ausschalten
+  trigger:
+  - at: 01:30
+    platform: time
+  condition:
+  - condition: state
+    entity_id: switch.ventilator
+    state: 'on'
+  action:
+  - data:
+      entity_id: switch.ventilator
+    service: switch.turn_off
+## KWL Modus korrekt setzen
+- alias: KWL Auto
+  trigger:
+  - at: '10:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      address: 6/7/4
+      payload: '0'
+    service: knx.send
+  - data:
+      address: 6/7/2
+      payload: '0'
+    service: knx.send
+## Tagobjekt und Nachobjekt setzen
+- alias: Tagobjekt
+  trigger:
+  - at: 06:10
+    platform: time
+  condition: []
+  action:
+  - data:
+      address: 0/1/42
+      payload: '1'
+    service: knx.send
+- alias: Tagobjekt Off
+  trigger:
+  - at: '22:30'
+    platform: time
+  condition: []
+  action:
+  - data:
+      address: 0/1/42
+      payload: '0'
+    service: knx.send
+###### Wetter
+- alias: Wetter via Telegram
+  trigger:
+  - event_data:
+      command: /wetter
+    event_type: telegram_command
+    platform: event
+  - event_data:
+      command: /w
+    event_type: telegram_command
+    platform: event
+  condition: []
+  action:
+  - data:
+      message: >
+        Wetter momentan:
+        
+        AussenTemp: {{ states('sensor.aussentemperatur') }} °Celsius
+        
+        Helligkeit Süd: {{ states('sensor.helligkeit_sud') }} lux
+        
+        Wind: {{ states('sensor.wind') }} m/s
+    service: telegram_bot.send_message
+#### 
+#### Raffstores
+- id: '1555778072416'
+  alias: Raffstores via Telegram2
+  trigger:
+  - event_data:
+      command: /raff
+    event_type: telegram_command
+    platform: event
+  - event_data:
+      command: /r
+    event_type: telegram_command
+    platform: event
+  condition: []
+  action:
+  - service: notify.notify
+    data:
+      message: 'Raffstores: '
+      data:
+        inline_keyboard:
+        - RaffstoresAb:/Raffstores_Ab, RaffstoresAuf:/Raffstores_Auf
+        - Finster:/Raffstores_Finster, Luftig:/Raffstores_Luftig, Licht:/Raffstores_Licht
+- id: '1555288072717'
+  alias: Raffstores Ab
+  trigger:
+  - event_data:
+      data: /Raffstores_Ab
+    event_type: telegram_callback
+    platform: event
+  condition: []
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      show_alert: false
+      message: Raffstores Ab
+  - data:
+      entity_id: cover.alle
+    service: cover.close_cover
+  - data:
+      message: 'Raffstores sind unten'
+    service: telegram_bot.send_message
+- id: '1538788072768'
+  alias: Kaffee via Telegram Off
+  trigger:
+  - event_data:
+      data: /Raffstores_Auf
+    event_type: telegram_callback
+    platform: event
+  condition: []
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      show_alert: false
+      message: Raffstores auf
+  - data:
+      entity_id: cover.alle
+    service: cover.open_cover
+  - data:
+      message: 'Raffstores sind offen'
+    service: telegram_bot.send_message
+- id: '4552288672717'
+  alias: Raffstores Finster
+  trigger:
+  - event_data:
+      data: /Raffstores_Finster
+    event_type: telegram_callback
+    platform: event
+  condition: []
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      show_alert: false
+      message: Raffstores Finster
+  - data:
+      entity_id: cover.alle
+      tilt_position: '0'
+    service: cover.set_cover_tilt_position
+  - data:
+      message: 'Raffstores sind finster'
+    service: telegram_bot.send_message
+- id: '1555288012317'
+  alias: Raffstores Luftig
+  trigger:
+  - event_data:
+      data: /Raffstores_Luftig
+    event_type: telegram_callback
+    platform: event
+  condition: []
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      show_alert: false
+      message: Raffstores Luftig
+  - data:
+      entity_id: cover.alle
+      tilt_position: '35'
+    service: cover.set_cover_tilt_position
+  - data:
+      message: 'Raffstores sind luftig'
+    service: telegram_bot.send_message
+- id: '1555688372717'
+  alias: Raffstores Licht
+  trigger:
+  - event_data:
+      data: /Raffstores_Licht
+    event_type: telegram_callback
+    platform: event
+  condition: []
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      show_alert: false
+      message: Raffstores Licht
+  - data:
+      entity_id: cover.alle
+      tilt_position: '100'
+    service: cover.set_cover_tilt_position
+  - data:
+      message: 'Raffstores sind licht'
+    service: telegram_bot.send_message
+##Kameras Telegram
+- alias: Raffstores via Telegram2
+  trigger:
+  - event_data:
+      command: /raff
+    event_type: telegram_command
+    platform: event
+  - event_data:
+      command: /b
+    event_type: telegram_command
+    platform: event
+  condition: []
+  action:
+  - service: notify.notify
+    data:
+      message: 'Bilder: '
+      data:
+        inline_keyboard:
+        - BildGarten:/Bild_Garten, BildVorne:/Bild_Vorne, BildGarage:/Bild_Garage, VideoGarage:/Video_Garage
+- alias: Bild Garten
+  trigger:
+  - event_data:
+      data: /Bild_Garten
+    event_type: telegram_callback
+    platform: event
+  condition: []
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      show_alert: false
+      message: Bild Garten
+  - service: notify.notify
+    data:
+      title: Send an image
+      message: "Bild Garten"
+      data:
+        photo:
+          - url: 'http://192.168.1.119:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=moe&pwd=Knights88'
+- alias: Bild Vorne
+  trigger:
+  - event_data:
+      data: /Bild_Vorne
+    event_type: telegram_callback
+    platform: event
+  condition: []
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      show_alert: false
+      message: Bild Vorne
+  - service: notify.notify
+    data:
+      title: Send an image
+      message: "Bild Vorne"
+      data:
+        photo:
+          - url: 'http://192.168.1.116:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=moe&pwd=Knights88'
+- alias: Bild Garage
+  trigger:
+  - event_data:
+      data: /Bild_Garage
+    event_type: telegram_callback
+    platform: event
+  condition: []
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      show_alert: false
+      message: Bild Garage
+  - service: telegram_bot.send_photo
+    data_template:
+      target: '{{ trigger.event.data.id }}'
+      url: 'http://hass:Knights88@192.168.1.65/ISAPI/Streaming/channels/1/picture'
+      verify_ssl: False
+      username: 'hass'
+      password: 'Knights88'
+      authentication: digest
+      caption: Hikvision camera
+- alias: Video Garage
+  trigger:
+  - event_data:
+      data: /Video_Garage
+    event_type: telegram_callback
+    platform: event
+  condition: []
+  action:
+    - service: telegram_bot.answer_callback_query
+      data_template:
+        callback_query_id: '{{ trigger.event.data.id }}'
+        show_alert: false
+        message: Video Garage
+    - service: camera.record
+      data:
+        entity_id: camera.garage
+        filename: '/config/www/test.mp4'
+        duration: 10
+        lookback: 30
+    - service: notify.notify
+      data:
+        title: "Test"
+        message: This is a Testvideo
+        data:
+          video:
+            - file: '/config/www/test.mp4'
+              caption: This is a test
+##Telegram Kamera Alarm Tor
+- alias: Notification Alarm Tor
+  trigger:
+  - entity_id: sensor.foscam_alarm_tor
+    platform: state
+    to: 'True'
+  action:
+  - data:
+      message: ALARM! Torkamera
+    service: notify.notify
+  - service: notify.notify
+    data:
+      title: Send an images
+      message: "Alarm Tor"
+      data:
+        photo:
+          - url: 'http://192.168.1.116:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=moe&pwd=Knights88'
+##Telegram Kamera Alarm Tor
+- alias: Notification Alarm Garten
+  trigger:
+  - entity_id: sensor.foscam_alarm_garten
+    platform: state
+    to: 'True'
+  action:
+  - data:
+      message: ALARM! Gartenkamera
+    service: notify.notify
+  - service: notify.notify
+    data:
+      title: Send an images
+      message: "Alarm Garten"
+      data:
+        photo:
+          - url: 'http://192.168.1.119:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=moe&pwd=Knights88'
+          
+          
+##Telegram Kamera Alarm Tor          
+- alias: Notification Alarm Garten Hik
+  trigger:
+  - entity_id: binary_sensor.ip_camera_motion
+    platform: state
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: 'person.gregor'
+      state: 'not_home'
+    - condition: state
+      entity_id: 'person.babsi'
+      state: 'not_home'
+  action:
+  - service: telegram_bot.send_photo
+    data_template:
+      url: 'http://hass:Knights88@192.168.1.65/ISAPI/Streaming/channels/1/picture'
+      verify_ssl: False
+      username: 'hass'
+      password: 'Knights88'
+      authentication: digest
+      caption: Motion Alarm!       

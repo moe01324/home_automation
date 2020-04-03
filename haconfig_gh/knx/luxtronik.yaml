@@ -1,0 +1,116 @@
+sensor:
+
+  - platform: template
+    sensors:
+      temp_difference:
+        friendly_name: Temp Diff
+        value_template: "{{  (state_attr('climate.wohnbereich', 'current_temperature')  - (states.sensor.aussentemperatur.state | float ) ) | round(2) }}"
+        
+  - platform: template
+    sensors:
+      innen_temp:
+        friendly_name: Innen Temp
+        value_template: "{{ ( (state_attr('climate.wohnbereich', 'current_temperature') )) }}"
+
+        
+  - platform: template
+    sensors:
+      temp_difference_text:
+        friendly_name: Luften
+        value_template: >-      
+          {% if states('sensor.temp_difference') | float > 0 %}
+            > Lüften! Draussen ist es {{ (states('sensor.temp_difference') | float | round (2)  | abs )  }}° kühler.
+          {%endif %}
+          {% if states('sensor.temp_difference') | float < 0 %}
+            > Fenster zu! Draussen ist es {{ (states('sensor.temp_difference') | float | round (2)  | abs )  }}° wärmer.
+          {%endif %}
+          {% if states('sensor.temp_difference') | float == 0 %}
+            > Gleichstand.
+          {%endif %}          
+
+  - platform: luxtronik
+    scan_interval: 60
+    sensors:
+      - id: ID_WEB_Temperatur_TVL
+        friendly_name: Temperatur Vorlauf
+      - id: ID_WEB_Temperatur_TBW #Warmwasser Ist-Temperatur
+        friendly_name: Warmwasser Ist-Temperatur
+      - id: ID_WEB_Einst_BWS_akt #Warmwasser Soll
+        friendly_name: Warmwasser Soll-Temp
+      - id: ID_WEB_Temperatur_TRL #Rücklauftemperatur
+        friendly_name: Temperatur Rücklauf
+      - id: ID_WEB_Sollwert_TRL_HZ #Rücklauf soll
+        friendly_name: Temperatur Rücklauf Soll
+      - id: ID_WEB_Temperatur_TA #Aussentemperatur
+        friendly_name: Aussentemperatur
+      - id: ID_WEB_Mitteltemperatur #Durchschnittstemperatur Aussen über 24 h (Funktion Heizgrenze)
+        friendly_name: Aussentemperatur Mittel
+      - id: ID_WEB_Zaehler_BetrZeitVD1 #Betriebsstunden Verdichter 1
+        friendly_name: Betriebsstunden Verdichter 1
+      - id: ID_WEB_Zaehler_BetrZeitZWE1 #Betriebsstunden Zweiter Wärmeerzeuger
+        friendly_name: Betriebsstunden ZWE
+      - id: ID_WEB_Zaehler_BetrZeitWP #Betriebsstunden Wärmepumpe
+        friendly_name: Betriebsstunden WP
+      - id: ID_WEB_Zaehler_BetrZeitHz #Betriebsstunden Heizung
+        friendly_name: Betriebsstunden Heizung
+      - id: ID_WEB_Zaehler_BetrZeitBW #Betriebsstunden Warmwasser
+        friendly_name: Betriebsstunden Warmwasser
+      - id: ID_WEB_WP_BZ_akt #Betriebszustand
+        friendly_name: Betriebszustand
+      - id: ID_WEB_WMZ_Durchfluss #Durchfluss Wärmemengenzähler
+        friendly_name: Durchfluss Wärmemengenzähler
+      - id: ID_WEB_WMZ_Heizung #Wärmemengenzähler Heizung
+        friendly_name: Wärmemengenzähler Heizung
+      - id: ID_WEB_WMZ_Brauchwasser #Wärmemengenzähler Brauchwasser
+        friendly_name: Wärmemengenzähler Brauchwasser
+      - id: ID_WEB_WMZ_Seit #Wärmemengenzähler Gesamt
+        friendly_name: Wärmemengenzähler Gesamt
+      - id: ID_WEB_SEC_Qh_Soll #Leistung Soll
+        friendly_name: LeistungSoll
+      - id: ID_WEB_SEC_Qh_Ist #Leistung Ist
+        friendly_name: LeistungIst
+        
+
+  - platform: template
+    sensors:
+      luxtronik_status:
+        value_template: >-
+          {%- if is_state("luxtronik.betriebszustand", "heating") %}
+            Heizen
+          {%- elif is_state("luxtronik.betriebszustand", "hot water") %}
+            Warmwasser
+          {%- elif is_state("luxtronik.betriebszustand", "evu") %}
+            EVU Sperre
+          {%- elif is_state("luxtronik.betriebszustand", "defrost") %}
+            Abtauen
+          {% else %}
+            Keine Anforderung
+          {%- endif %}
+          
+          
+  - platform: history_stats
+    name: Warmwasser
+    entity_id: sensor.luxtronik_status
+    state: 'Warmwasser'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: ' {{ now() }}'
+    
+  - platform: history_stats
+    name: Heizen
+    entity_id: sensor.luxtronik_status
+    state: 'Heizen'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: ' {{ now() }}'
+    
+  - platform: history_stats
+    name: EVU
+    entity_id: sensor.luxtronik_status
+    state: 'EVU Sperre'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: ' {{ now() }}'
+    
+
+          
