@@ -112,7 +112,6 @@ Some of the automation logic is directly on the devices, others is supported by 
 |--|--|--|
 | MDT Glastaster II Smart BE-GT2TW.01 | https://www.mdt.de/Glastaster_Smart.html |  |
 | MDT Jalousieaktoren | https://www.mdt.de/Jalousieaktoren.html |  |
-| MDT Glastaster II Smart BE-GT2TW.01 | https://www.mdt.de/Glastaster_Smart.html |  |
 | MDT CO2 Sensor | https://www.mdt.de/CO2_Sensor.html |  |
 | MDT IP Router | https://www.mdt.de/Interfaces.html |  |
 | MDT Presence Detector| https://www.mdt.de/Praesenzmelder.html |  |
@@ -122,9 +121,9 @@ Some of the automation logic is directly on the devices, others is supported by 
 | ComfoConnect KNX C | https://www.zehnder-systems.de/produkte-und-systeme/komfortable-wohnraumlueftung/zehnder-comfoconnect-knx-c |  |
 
 ## KNX Switches
-I really like the fully customizable MDT Glastaster.
+I really like the fully customizable MDT Glastaster. Altough rarely used because every room has a presence detector from MDT.
 
-Pretty default switch that controls lights and the coffee machine in the kitchen/dinner area. The nice thing about this switches is that they are really very customizable. E.g. the icons are adaptable, colors can be changed etc.
+Pretty default switch that controls lights and the coffee machine in the kitchen/dinner area. The nice thing about this switches is that they are really very customizable. E.g. the icons are adaptable, colors can be changed etc. When they are not used, they disable the display completely or show the time.
 <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/switch1.jpg" height="500px" />
 
 Second page of the kitchen/dinner area. Controlling window blinds and showing the outside temperature.
