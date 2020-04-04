@@ -108,6 +108,7 @@ To customize the header display. Lots of options!
 
 * Ventilation view
 For my ventilation view I customised an picture and put some ventilation values over it.
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/kwl2.png" height="300px" />
 
 * Luxtronik Integration - https://github.com/Bouni/Home-Assistant-Luxtronik
 To integrate my heatpump to receive lots of info.
