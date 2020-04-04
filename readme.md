@@ -35,6 +35,10 @@ To manage all the passwords.
 
 Home Assistant is used as a Visualization and Automation Tool. https://www.home-assistant.io/
 
+Also using HACS to install and maintain additional integrations, components and themes.
+| HACS |https://github.com/hacs/integration |
+
+
 ## General Setup
 
 Please mind that I adapt (play around) with the system all the time -> Most probably the screenshots do NOT match the config provided here.
@@ -71,6 +75,42 @@ Screenshots from my android mobile.
 
 <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/mobile/dark.jpg" height="500px" /> 
 
+## UI / Lovelace
+
+The UI config is available in the folder /haconfig_gh/.
+
+### Themes 
+All Themes are installed via HACS.
+
+Currently in use:
+
+* https://github.com/JuanMTech/google_dark_theme
+* https://github.com/naofireblade/clear-theme
+
+### Custom Components
+
+Again, I try to manage as much of these through HACS.
+
+* Simple Thermostat - https://github.com/nervetattoo/simple-thermostat
+Differen Thermostat card.
+* Lovelace Swipe Navigation - https://github.com/maykar/lovelace-swipe-navigation
+Allows to swipe from page to page on mobile.
+* Mini Graph Card - https://github.com/kalkih/mini-graph-card
+Some different display of graphs with lots of customisation options
+* Weather Card - https://github.com/bramkragten/weather-card
+Animated weather incons
+* Calendar Card - https://github.com/ljmerza/calendar-card
+To show multiple Gooogle Calendars.
+* Custom Header - https://github.com/maykar/custom-header
+To customize the header display. Lots of options!
+
+### Other Stuff
+
+* Ventilation view
+For my ventilation view I customised an picture and put some ventilation values over it.
+
+* Luxtronik Integration - https://github.com/Bouni/Home-Assistant-Luxtronik
+To integrate my heatpump to receive lots of info.
 
 ## Automations 
 
@@ -89,14 +129,6 @@ All main lights are controlled via KNX motion detectors. Usually I dont need to 
 
 * Garden Irrigation
 Can be scheduled via HA UI.
-
-**Additional enhancements used:**
-| description | links| 
-|--|--|
-| HACS |https://github.com/hacs/integration |
-| Media Player Card | https://github.com/kalkih/mini-media-player |
-| Custom Header | https://github.com/maykar/custom-header |
-| Luxtronik Integration | https://github.com/Bouni/Home-Assistant-Luxtronik |
 
 ## Telegram Integration
 A Telegram Bot is integrated into HA. Allows to send me notifications. E.g. if I leave the house and windows are still open. In case the smoke detectors are alarming etc.
@@ -198,7 +230,6 @@ Integrated into Homeassistant for automation and control.
 Following online resource were quite helpful for me:
 https://community.home-assistant.io/
 https://knx-user-forum.de
-
 
 
 If you found this helpful, feel free to buy me a coffee:
