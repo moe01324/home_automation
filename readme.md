@@ -220,11 +220,17 @@ Are also integrated into Homeassistant.
 A Raspberry Pi connect to some relays that are controlling Rainbird water valves.
 Integrated into Homeassistant for automation and control.
 
+
 <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/irrig1.jpg" height="500px" />
 
 <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/irrig2.jpg" height="500px" />
 
 <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/irrig3.jpg" height="500px" />
+
+#### Weather data
+
+To receive local rain data the API at http://at-wetter.tk/api/v1/station/11036/regen is used. 
+This allows to disable irrigation when it was anyway raining in the last few hours.
 
 # Links
 
