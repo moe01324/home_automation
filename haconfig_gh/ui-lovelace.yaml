@@ -5,10 +5,8 @@ resources:
     type: js
   - url: /hacsfiles/custom-header/custom-header.js
     type: module  
-  - url: /local/entity-markdown.js
-    type: js
-  - url: /hacsfiles/lovelace-card-preloader.js
-    type: js  
+##  - url: /local/entity-markdown.js
+##    type: js
   - url: /hacsfiles/weather-card/weather-card.js
     type: module
   - url: /hacsfiles/spotify-card/spotify-card.js
@@ -25,6 +23,8 @@ resources:
     type: module 
   - url: /hacsfiles/lovelace-swipe-navigation/swipe-navigation.js
     type: module 
+  - url: /hacsfiles/scheduler-card/scheduler-card.js?v=0
+    type: module
 
 excluded_entities:
   - weblink.router
@@ -41,7 +41,7 @@ swipe_nav:
   
 views:
   - title: !secret name
-    id: gramat
+    id: 
     cards:
       - type: vertical-stack
         cards:
@@ -51,6 +51,66 @@ views:
             details: true
             forecast: true
             
+          - type: markdown
+            id: tempdiff
+            title: Temp Unterschied
+            entity: sensor.temp_difference_text
+            content: > 
+             {{ states('sensor.temp_difference_text') }}
+            
+          - type: "custom:button-card"
+            entity: switch.kaffeemaschine
+            icon: mdi:coffee-outline
+            color: rgb(28, 128, 199)
+            name: Kaffee
+            styles:
+              card:
+               - height: 150px
+               - font-size: 24px
+              label:
+               - font-size: 16px
+            show_last_changed: true
+
+          - type: "custom:button-card"
+            entity: switch.wasser1
+            icon: mdi:water
+            color: rgb(28, 128, 199)
+            name: Wiese
+            styles:
+              card:
+               - height: 150px
+               - font-size: 24px
+              label:
+               - font-size: 16px
+            show_last_changed: true
+
+      - type: vertical-stack
+        cards:
+
+          - type: entities
+            title: Raffstores Gesamt
+            show_header_toggle: false
+            entities:
+              - type: section
+              - entity: cover.alle
+              
+          - type: iframe
+            url: http://fahrplan.oebb.at/bin/stboard.exe/d
+            aspect_ratio: 60%
+              
+          - type: custom:calendar-card
+            title: "Kalendar"
+            progressBar: true
+            numberOfDays: 10
+            showLocation: true
+            entities:
+              - calendar.fia_f1_fia_formula_1_world_championship
+              - calendar.motogp
+              
+
+      - type: vertical-stack
+        cards:
+        
           - type: custom:mini-graph-card
             name: Aussentemperatur
             icon: mdi:temperature-celsius
@@ -66,6 +126,7 @@ views:
             animate: true
             show:
               fill: false
+              labels: true
             color_thresholds:
               - value: 12
                 color: "#42f49e"          
@@ -73,35 +134,26 @@ views:
                 color: "#f39c12"
               - value: 30
                 color: "#c0392b"
-            
-          - type: iframe
-            url: 
-            aspect_ratio: 55%
-
-      - type: vertical-stack
-        cards:
-          - type: entities
-            title: Raffstores Gesamt
-            show_header_toggle: false
+                
+          - type: custom:mini-graph-card
             entities:
-              - type: section
-              - entity: cover.alle
-              
-          - type: custom:entity-markdown
-            id: markdown-example
-            title: Temp Unterschied
-            entity: sensor.temp_difference_text
+            - entity: sensor.aussentemperatur
+              aggregate_func: max
+              name: Max
+              color: #e74c3c
+            - entity: sensor.aussentemperatur
+              aggregate_func: min
+              name: Min
+            - entity: sensor.aussentemperatur
+              aggregate_func: avg
+              name: Avg
+              color: green
+            name: Aussentemperatur (letzte Woche)
+            hours_to_show: 168
+            group_by: date
+            show:
+              lables: true
             
-          - type: custom:calendar-card
-            title: "Kalendar"
-            progressBar: true
-            numberOfDays: 10
-            showLocation: true
-            entities:
-              - calendar.cal
-
-      - type: vertical-stack
-        cards:
           - type: custom:mini-graph-card
             name: Windgeschwindigkeit
             icon: mdi:weather-windy
@@ -119,6 +171,8 @@ views:
             animate: true
             show:
               fill: false
+              labels: true
+              extrema: true
             color_thresholds:
               - value: 3
                 color: "#f39c12"
@@ -137,6 +191,7 @@ views:
             decimals: 0
             show:
               fill: false
+              labels: true
             entities:
               - entity: sensor.co2_wohnzimmer
                 name: Wohnzimmer
@@ -158,6 +213,8 @@ views:
             title: Zuhause
             show_header_toggle: false
             entities:
+
+                
 
         
   - icon: mdi:lightbulb-on-outline
@@ -248,7 +305,27 @@ views:
                icon: mdi:fan
                
             columns: 3
-        
+
+      - type: glance
+        title: Scenes
+        show_state: false
+        entities:
+          - entity: scene.couch
+            name: Couch ON
+            icon: mdi:sofa
+            tap_action:
+             action: call-service
+             service: scene.turn_on
+             service_data: 
+               entity_id: scene.couch
+          - entity: scene.couchoff
+            name: Couch OFF
+            icon: mdi:sofa
+            tap_action:
+             action: call-service
+             service: scene.turn_on
+             service_data: 
+               entity_id: scene.couchoff
       - type: glance
         title: Licht EG
         show_state: false
@@ -419,6 +496,47 @@ views:
             - type: section
             - entity: automation.show_displays
             
+        - type: custom:mini-graph-card
+          name: Garagentemperatur
+          icon: mdi:temperature-celsius
+          hours_to_show: 24
+          line_width: 4
+          font_size: 75
+          points_per_hour: 3
+          entities:
+            - entity: sensor.garage_temperature
+              name: Garage Temp
+          align_state: center
+          hour24: true
+          animate: true
+          show:
+            fill: false
+          color_thresholds:
+            - value: 12
+              color: "#42f49e"          
+            - value: 25
+              color: "#f39c12"
+            - value: 30
+              color: "#c0392b"
+              
+            
+        - type: custom:mini-graph-card
+          name: Garagenfeuchtigkeit
+          icon: mdi:water-percent
+          hours_to_show: 24
+          line_width: 4
+          font_size: 75
+          points_per_hour: 3
+          entities:
+            - entity: sensor.garage_humidity
+              name: Garage Feuchte
+          align_state: center
+          hour24: true
+          animate: true
+          show:
+            fill: false
+            labels: true
+            
       - type: vertical-stack
         cards:
           - type: custom:mini-graph-card
@@ -438,6 +556,7 @@ views:
             unit: "m³/h"
             show:
               fill: false
+              labels: true
             color_thresholds:
                 - value: 20
                   color: "#2F4858"
@@ -516,19 +635,7 @@ views:
                icon: mdi:view-sequential
             columns: 3
             
-          - type: "custom:button-card"
-            entity: lock.gramat
-            name: Haustür
-            color: rgb(28, 128, 199)
-            show_state: true
-            state:
-              - value: "Locked"
-                color: var(--disabled-text-color)
-                icon: mdi:home-lock
-              - value: "Unlocked"
-                color: rgb(5, 147, 255)
-                icon: mdi:home-unlock
-          
+
       - type: entities
         title: Raffstores UG
         show_header_toggle: false
@@ -713,42 +820,55 @@ views:
   - title: Beregnung
     icon: 'mdi:water-pump'
     cards:
+      - type: glance
+        show_state: false
+        title: Manual Control
+        entities:
+          - entity: switch.wasser1
+            name: Wiese
+            icon: mdi:water
+            tap_action:
+              action: toggle
+          - entity: switch.wasser2
+            name: Einfahrt
+            icon: mdi:water
+            tap_action:
+              action: toggle
+          - entity: switch.wasser3
+            name: Blumen
+            icon: mdi:water
+            tap_action:
+              action: toggle
       - type: entities
         show_header_toggle: false
         title: Program Wiese
         entities:
           - input_boolean.retic_program1_enable
-          - script.retic_program1_run
           - input_datetime.retic_program1_start_time_1
-          - input_datetime.retic_program1_start_time_2
           - group.retic_program1_watering_days
           - group.retic_program1_run_times
+          - type: divider
+          - script.retic_program1_run
       - type: entities
         show_header_toggle: false
-        title: Program Blumenwiese
+        title: Program Einfahrt
         entities:
           - input_boolean.retic_program2_enable
-          - script.retic_program2_run
           - input_datetime.retic_program2_start_time_1
-          - input_datetime.retic_program2_start_time_2
           - group.retic_program2_watering_days
           - group.retic_program2_run_times
+          - type: divider
+          - script.retic_program2_run
       - type: entities
         show_header_toggle: false
         title: Program Blumen
         entities:
           - input_boolean.retic_program3_enable
-          - script.retic_program3_run
           - input_datetime.retic_program3_start_time_1
           - group.retic_program3_watering_days
           - group.retic_program3_run_times
-      - type: entities
-        show_header_toggle: false
-        title: Manual Control
-        entities:
-          - input_boolean.retic_station_1_run
-          - input_boolean.retic_station_2_run
-          - input_boolean.retic_station_3_run
+          - type: divider
+          - script.retic_program3_run
       - type: entities
         title: Rain Settings
         entities:
@@ -757,19 +877,33 @@ views:
           - input_boolean.retic_rain_parameters_met
           - input_boolean.retic_rain_override
         show_header_toggle: false
+
+  - title: Coffee
+    icon: 'mdi:coffee'
+    cards:
       - type: glance
         show_state: false
         title: Status
         entities:
-          - entity: switch.wasser1
-            name: Wiese
-            icon: mdi:water
-          - entity: switch.wasser2
-            name: Blumenwiese
-            icon: mdi:water
-          - entity: switch.wasser3
-            name: Blumen
-            icon: mdi:water
+          - entity: switch.kaffeemaschine
+            name: Kaffee
+            icon: mdi:coffee
+
+      - type: entities
+        show_header_toggle: false
+        title: Program Kaffee
+        entities:
+          - input_boolean.kaffee_program1_enable
+          - script.kaffee_program1_run
+          - input_datetime.kaffee_program1_start_time_1
+          - group.kaffee_program1_days
+          - group.kaffee_program1_run_times
+     
+      - type: entities
+        show_header_toggle: false
+        title: Manual Control
+        entities:
+          - input_boolean.kaffee_station_1_run
 
   - icon: mdi:cctv
     title: Kameras
@@ -790,8 +924,17 @@ views:
         title: Vorne
         entities: []
         camera_image: camera.vorne
+        camera_view: live
+        
+      - type: picture-glance
+        title: Gartentor
+        entities: []
+        camera_image: camera.gartentor_live            
         camera_view: live  
-            
+
+      - type: picture-entity
+        entity: camera.gartentor_last_ring
+
 
   - icon: mdi:chart-areaspline
     title: Stats
@@ -811,3 +954,19 @@ views:
       - type: iframe
         url: 'http://192.168.1.7:3000/d-solo/w7vbNRxZz/home-assistant?tab=visualization&panelId=8&orgId=1" width="450" height="200" frameborder="0"'
         aspect_ratio: 50%
+        
+        
+      - type: iframe
+        url: 'http://192.168.1.7:3000/d-solo/w7vbNRxZz/home-assistant?tab=visualization&orgId=1&panelId=11" width="450" height="200" frameborder="0"'
+        aspect_ratio: 50%
+        
+        
+  - icon: mdi:timetable
+    title: Schedule
+    cards:
+      - type: custom:scheduler-card        
+        
+        
+        
+        
+        

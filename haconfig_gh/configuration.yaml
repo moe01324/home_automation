@@ -15,7 +15,18 @@ knx:
     - type: 'time'
       address: '0/1/40'
 
+scene: !include scenes.yaml
 
+person:
+  - name: Gregor
+    id: b8028abcfd8646f99c0121da5289863d
+    device_trackers:
+      - device_tracker.huawei_p30_lite_b7ddbdeb2
+
+  - name: Babsi
+    id: 6b9c800f509345938ea5c0b3f8909003
+    device_trackers:
+      - device_tracker.pocophonef1_babsi
 
 # Enables the frontend
 frontend:
@@ -23,7 +34,7 @@ frontend:
   themes: !include_dir_merge_named themes
 
 favicon:
-  title: title
+  title: 
   icon_path: /local/favicons/
 
 system_log:
@@ -43,9 +54,11 @@ alarm_control_panel:
   - platform: manual
     name: Home Alarm
     code: !secret alarmcode
-    pending_time: 20
+    arming_time: 20
     delay_time: 1
     trigger_time: 60
+    
+
     
 influxdb:
   include:
@@ -75,6 +88,10 @@ influxdb:
        - sensor.monthly_energy_heizung
        - sensor.monthly_energy_wasser
        - sensor.innen_temp
+       - sensor.regenoriginal
+       - sensor.regen24h
+       - sensor.garage_temperature
+       - sensor.garage_humidity
 
 #mqtt:
 # broker: 192.168.1.7
@@ -107,11 +124,21 @@ camera:
     name: garage
     
   - platform: generic
-  - platform: generic
+    still_image_url: 
+    stream_source: 
     name: vorne
     username: !secret hikuser
     password: !secret hikpwd
     authentication: digest
+    
+ ## Kameras
+switch:      
+  - platform: hikvisioncam
+    host: 192.168.1.65
+    name: "Kamera Vorne"
+    username: !secret hikuser
+    password: !secret hikpwd
+    port: 443
 
 logbook:
   exclude:
@@ -186,10 +213,6 @@ luxtronik:
   host: "192.168.1.53"
   port: 8889
 
-lock:
-  - platform: nuki
-    host: 192.168.1.11
-    token: !secret nuki
 
 # Example configuration.yaml entry for the Telegram Bot
 telegram_bot:

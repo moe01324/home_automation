@@ -1,0 +1,46 @@
+- id: '1595704028579'
+  name: Couch
+  entities:
+    light.bodenspots:
+      friendly_name: Bodenspots
+      state: 'on'
+      supported_features: 0
+    light.esstisch:
+      friendly_name: Esstisch
+      state: 'off'
+      supported_features: 1
+    light.flur_eg:
+      friendly_name: Flur EG
+      state: 'off'
+      supported_features: 0
+    light.kuche:
+      friendly_name: Küche
+      state: 'off'
+      supported_features: 0
+    light.kuche_arbeitsflache:
+      friendly_name: Küche Arbeitsfläche
+      state: 'off'
+      supported_features: 0
+    light.wohnzimmer:
+      friendly_name: Wohnzimmer
+      state: 'off'
+      supported_features: 0
+    switch.pm_sperre_kuche:
+      friendly_name: PM Sperre Küche
+      state: 'on'
+    switch.pm_sperre_wohnzimmer:
+      friendly_name: PM Sperre Wohnzimmer
+      state: 'on'
+- id: '1596472436484'
+  name: CouchOff
+  entities:
+    light.bodenspots:
+      friendly_name: Bodenspots
+      state: 'off'
+      supported_features: 0
+    switch.pm_sperre_kuche:
+      friendly_name: PM Sperre Küche
+      state: 'off'
+    switch.pm_sperre_wohnzimmer:
+      friendly_name: PM Sperre Wohnzimmer
+      state: 'off'

@@ -36,44 +36,44 @@
     data:
       entity_id: media_player.buro
       source: FM4
-'bwmalarm':
-  alias: BWM Alarm
-  sequence:
-  - data:
-      entity_id: media_player.living_room
-      volume_level: '1.0'
-    service: media_player.volume_set
-  - data:
-      entity_id: media_player.living_room
-      media_content_id: http://192.168.1.7:8123/local/Nuclear-alarm-siren.mp3
-      media_content_type: music
-    service: media_player.play_media
-  - data:
-      entity_id: media_player.buro
-      volume_level: '1.0'
-    service: media_player.volume_set
-  - data:
-      entity_id: media_player.buro
-      media_content_id: http://192.168.1.7:8123/local/Nuclear-alarm-siren.mp3
-      media_content_type: music
-    service: media_player.play_media    
-  - delay: 00:01:00
-  - data:
-      entity_id: media_player.living_room
-      volume_level: '0.2'
-    service: media_player.volume_set
-  - data:
-      entity_id: media_player.living_room
-      source: FM4
-    service: media_player.select_source
-  - data:
-      entity_id: media_player.buro
-      volume_level: '0.2'
-    service: media_player.volume_set
-  - data:
-      entity_id: media_player.buro
-      source: FM4
-    service: media_player.select_source
+## 'bwmalarm':
+##  alias: BWM Alarm
+##  sequence:
+##  - data:
+##      entity_id: media_player.living_room
+##      volume_level: '1.0'
+##    service: media_player.volume_set
+##  - data:
+##      entity_id: media_player.living_room
+##      media_content_id: http://192.168.1.7:8123/local/Nuclear-alarm-siren.mp3
+##      media_content_type: music
+##    service: media_player.play_media
+##  - data:
+##      entity_id: media_player.buro
+##      volume_level: '1.0'
+##    service: media_player.volume_set
+##  - data:
+##      entity_id: media_player.buro
+##      media_content_id: http://192.168.1.7:8123/local/Nuclear-alarm-siren.mp3
+##      media_content_type: music
+##    service: media_player.play_media    
+##  - delay: 00:01:00
+##  - data:
+##      entity_id: media_player.living_room
+##      volume_level: '0.2'
+##    service: media_player.volume_set
+##  - data:
+##      entity_id: media_player.living_room
+##      source: FM4
+##    service: media_player.select_source
+##  - data:
+##      entity_id: media_player.buro
+##      volume_level: '0.2'
+##    service: media_player.volume_set
+##  - data:
+##      entity_id: media_player.buro
+##      source: FM4
+##    service: media_player.select_source
 'lightson':
   alias: Alarm Lights All On
   sequence:
