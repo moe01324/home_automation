@@ -1,52 +1,47 @@
+knx:
+  climate:
 
-climate:
-   - platform: knx
-     name: Wohnbereich
-     temperature_address: '4/0/0'           # Ist Wert
-     target_temperature_address: '4/2/0'        #  Sollwertverschiebung
-     target_temperature_state_address: '4/1/0'    # Soll Wert
-     operation_mode_address: '4/3/0'        # Betriebsmodus
-     operation_mode_state_address: '4/4/0'  # Betriebsmodus status
-     min_temp: 15
-     max_temp: 25
+     - name: Wohnbereich
+       temperature_address: '4/0/0'           # Ist Wert
+       target_temperature_address: '4/2/0'        #  Sollwertverschiebung
+       target_temperature_state_address: '4/1/0'    # Soll Wert
+       operation_mode_address: '4/3/0'        # Betriebsmodus
+       operation_mode_state_address: '4/4/0'  # Betriebsmodus status
+       min_temp: 15
+       max_temp: 25
      
-   - platform: knx
-     name: Büro
-     temperature_address: '4/0/1'           # Ist Wert
-     target_temperature_address: '4/1/1'        #  Sollwert
-     target_temperature_state_address: '4/1/1'    # Soll Wert
-     operation_mode_address: '4/3/1'        # Betriebsmodus
-     operation_mode_state_address: '4/4/1'  # Betriebsmodus status
-     min_temp: 15
-     max_temp: 25
+     - name: Büro
+       temperature_address: '4/0/1'           # Ist Wert
+       target_temperature_address: '4/1/1'        #  Sollwert
+       target_temperature_state_address: '4/1/1'    # Soll Wert
+       operation_mode_address: '4/3/1'        # Betriebsmodus
+       operation_mode_state_address: '4/4/1'  # Betriebsmodus status
+       min_temp: 15
+       max_temp: 25
      
-   - platform: knx
-     name: Zimmer
-     temperature_address: '4/0/2'           # Ist Wert
-     target_temperature_address: '4/1/2'        #  Sollwert
-     target_temperature_state_address: '4/1/2'    # Soll Wert
-     operation_mode_address: '4/3/2'        # Betriebsmodus
-     operation_mode_state_address: '4/4/2'  # Betriebsmodus status
-     min_temp: 15
-     max_temp: 25
+     - name: Zimmer
+       temperature_address: '4/0/2'           # Ist Wert
+       target_temperature_address: '4/1/2'        #  Sollwert
+       target_temperature_state_address: '4/1/2'    # Soll Wert
+       operation_mode_address: '4/3/2'        # Betriebsmodus
+       operation_mode_state_address: '4/4/2'  # Betriebsmodus status
+       min_temp: 15
+       max_temp: 25
      
-   - platform: knx
-     name: Ankleide
-     temperature_address: '4/0/3'           # Ist Wert
-     target_temperature_address: '4/1/3'        #  Sollwert
-     target_temperature_state_address: '4/1/3'    # Soll Wert
-     operation_mode_address: '4/3/3'        # Betriebsmodus
-     operation_mode_state_address: '4/4/3'  # Betriebsmodus status
-     min_temp: 15
-     max_temp: 25
+     - name: Ankleide
+       temperature_address: '4/0/3'           # Ist Wert
+       target_temperature_address: '4/1/3'        #  Sollwert
+       target_temperature_state_address: '4/1/3'    # Soll Wert
+       operation_mode_address: '4/3/3'        # Betriebsmodus
+       operation_mode_state_address: '4/4/3'  # Betriebsmodus status
+       min_temp: 15
+       max_temp: 25
     
-   - platform: knx
-     name: Schlafzimmer
-     temperature_address: '4/0/4'           # Ist Wert
-     target_temperature_address: '4/2/4'        #  Sollwertverschiebung
-     target_temperature_state_address: '4/1/4'    # Soll Wert
-     operation_mode_address: '4/3/4'        # Betriebsmodus
-     operation_mode_state_address: '4/4/4'  # Betriebsmodus status
-     min_temp: 15
-     max_temp: 25
-     
+     - name: Schlafzimmer
+       temperature_address: '4/0/4'           # Ist Wert
+       target_temperature_address: '4/2/4'        #  Sollwertverschiebung
+       target_temperature_state_address: '4/1/4'    # Soll Wert
+       operation_mode_address: '4/3/4'        # Betriebsmodus
+       operation_mode_state_address: '4/4/4'  # Betriebsmodus status
+       min_temp: 15
+       max_temp: 25

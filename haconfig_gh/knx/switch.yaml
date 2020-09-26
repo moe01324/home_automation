@@ -1,58 +1,100 @@
-switch:
+
+knx:
+  switch:
 
   #############################
   ###  Steckdosen
   #############################
 
-  - platform: knx
-    name: Steckdose EG
-    address: '2/0/0'
-    state_address: '2/1/0'
-  - platform: knx
-    name: Kaffeemaschine
-    address: '2/0/1'
-    state_address: '2/1/1'
-  - platform: knx
-    name: Ventilator
-    address: '2/0/2'
-    state_address: '2/1/2'
-  - platform: knx
-    name: Steckdose OG
-    address: '2/0/3'
-    state_address: '2/1/3'
-  - platform: knx
-    name: Handtuchheizkörper
-    address: '2/0/4'
-    state_address: '2/1/4'
-  - platform: knx
-    address: '0/1/30'
-    name: Alarm Status
-    state_address: '0/1/30'
-  - platform: knx
-    address: '0/1/42'
-    name: Tagobjekt
-    state_address: '0/1/42'
-  - platform: knx
-    address: '7/2/20'
-    name: AlarmSirene
-    state_address: '7/2/21'
-  - platform: knx
-    address: '0/0/1'
-    name: AllesAus
-    state_address: '0/0/1'
+
+    - name: Steckdose EG
+      address: '2/0/0'
+      state_address: '2/1/0'
+
+    - name: Kaffeemaschine
+      address: '2/0/1'
+      state_address: '2/1/1'
+
+    - name: Ventilator
+      address: '2/0/2'
+      state_address: '2/1/2'
+
+    - name: Steckdose OG
+      address: '2/0/3'
+      state_address: '2/1/3'
+
+    - name: Handtuchheizkörper
+      address: '2/0/4'
+      state_address: '2/1/4'
+
+    - address: '0/1/30'
+      name: Alarm Status
+      state_address: '0/1/30'
+
+    - address: '0/1/42'
+      name: Tagobjekt
+      state_address: '0/1/42'
+
+    - address: '7/2/20'
+      name: AlarmSirene
+      state_address: '7/2/21'
+
+    - address: '0/0/1'
+      name: AllesAus
+      state_address: '0/0/1'
+
+  #############################
+  ###  Präsenzmelder
+  ############################# 
+ 
+    - name: PM Sperre Flur EG
+      address: '1/5/2'
+      state_address: '1/5/2'
+ 
+    - name: PM Sperre Bad EG
+      address: '1/5/3'
+      state_address: '1/5/3'
     
+    - name: PM Sperre Wohnzimmer
+      address: '1/5/0'
+      state_address: '1/5/0' 
+    
+    - name: PM Sperre Küche
+      address: '1/5/1'
+      state_address: '1/5/1' 
+    
+    - name: PM Sperre Ankleide
+      address: '1/5/7'
+      state_address: '1/5/7' 
+    
+    - name: PM Sperre Bad OG
+      address: '1/5/4'
+      state_address: '1/5/4' 
+    
+    - name: PM Sperre Schlafzimmer
+      address: '1/5/8'
+      state_address: '1/5/8' 
+    
+    - name: PM Sperre Zimmer
+      address: '1/5/5'
+      state_address: '1/5/5' 
+    
+    - name: PM Sperre Büro
+      address: '1/5/6'
+      state_address: '1/5/6' 
+
     
 ## Bewässerung
-    
+switch:    
   - platform: command_line
     switches:
-      wasser1:
+      wasser2:
         command_on: 'curl -k "http://192.168.1.108/gpio.php?pin=1&status=0"'
         command_off: 'curl -k "http://192.168.1.108/gpio.php?pin=1&status=1"'
         
   - platform: command_line
     switches:
-      wasser2:
+      wasser1:
         command_on: 'curl -k "http://192.168.1.108/gpio.php?pin=2&status=0"'
         command_off: 'curl -k "http://192.168.1.108/gpio.php?pin=2&status=1"'
         
@@ -62,61 +104,4 @@ switch:
         command_on: 'curl -k "http://192.168.1.108/gpio.php?pin=3&status=0"'
         command_off: 'curl -k "http://192.168.1.108/gpio.php?pin=3&status=1"'
         
- ## Kameras
-      
-  - platform: hikvisioncam
-    host: 192.168.1.65
-    name: "Kamera Vorne"
-    username: !secret hikuser
-    password: !secret hikpwd
-    port: 443
- 
-  #############################
-  ###  Präsenzmelder
-  ############################# 
- 
-  - platform: knx
-    name: PM Sperre Flur EG
-    address: '1/5/2'
-    state_address: '1/5/2'
- 
-  - platform: knx
-    name: PM Sperre Bad EG
-    address: '1/5/3'
-    state_address: '1/5/3'
-    
-  - platform: knx
-    name: PM Sperre Wohnzimmer
-    address: '1/5/0'
-    state_address: '1/5/0' 
-    
-  - platform: knx
-    name: PM Sperre Küche
-    address: '1/5/1'
-    state_address: '1/5/1' 
-    
-  - platform: knx
-    name: PM Sperre Ankleide
-    address: '1/5/7'
-    state_address: '1/5/7' 
-    
-  - platform: knx
-    name: PM Sperre Bad OG
-    address: '1/5/4'
-    state_address: '1/5/4' 
-    
-  - platform: knx
-    name: PM Sperre Schlafzimmer
-    address: '1/5/8'
-    state_address: '1/5/8' 
-    
-  - platform: knx
-    name: PM Sperre Zimmer
-    address: '1/5/5'
-    state_address: '1/5/5' 
-    
-  - platform: knx
-    name: PM Sperre Büro
-    address: '1/5/6'
-    state_address: '1/5/6' 
- 
+

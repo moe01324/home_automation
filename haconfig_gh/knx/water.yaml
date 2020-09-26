@@ -1,5 +1,3 @@
-
-      
 sensor:
   - platform: template    # determine if today is selected as a watering day for program 1
     sensors:
@@ -33,18 +31,8 @@ input_datetime:
     has_date: false
     has_time: true
 
-  retic_program1_start_time_2:
-    name: Blumenwiese Start Time
-    has_date: false
-    has_time: true
-
   retic_program2_start_time_1:
-    name: Wiese Start Time
-    has_date: false
-    has_time: true
-
-  retic_program2_start_time_2:
-    name: Blumenwiese Start Time
+    name: Einfahrt Start Time
     has_date: false
     has_time: true
     
@@ -61,22 +49,8 @@ input_number:
     step: 1
     icon: mdi:camera-timer
 
-  retic_program1_station2_run_time:
-    name: Blumenwiese Run Time
-    min: 0
-    max: 30
-    step: 1
-    icon: mdi:camera-timer
-
   retic_program2_station1_run_time:
-    name: Wiese Run Time
-    min: 0
-    max: 30
-    step: 1
-    icon: mdi:camera-timer
-
-  retic_program2_station2_run_time:
-    name: Blumenwiese Run Time
+    name: Einfahrt Run Time
     min: 0
     max: 30
     step: 1
@@ -169,20 +143,20 @@ input_boolean:
 
 
   retic_program1_enable:   # enable program to run
-    name: Enable
+    name: Active
     
   retic_program2_enable:
-    name: Enable
+    name: Active
     
   retic_program3_enable:
-    name: Enable
+    name: Active
 
 
   retic_station_1_run:
     name: Wiese Run
   
   retic_station_2_run:
-    name: Blumenwiese Run
+    name: Einfahrt Run
     
   retic_station_3_run:
     name: Blumen Run
@@ -213,7 +187,7 @@ group:                  # frontend interface setup
       - group.retic_program1_run_times
     
   retic_program2:
-    name: 'Blumenwiese'
+    name: 'Einfahrt'
     entities:
       - input_boolean.retic_program2_enable
       - script.retic_program2_run
@@ -243,7 +217,7 @@ group:                  # frontend interface setup
       - input_boolean.retic_program1_sunday
 
   retic_program2_watering_days:
-    name: 'Watering days Blumenwiese'
+    name: 'Watering days Einfahrt'
     icon: mdi:calendar-multiple-check
     entities:
       - input_boolean.retic_program2_monday
@@ -267,25 +241,22 @@ group:                  # frontend interface setup
       - input_boolean.retic_program3_sunday
 
   retic_program1_run_times:
-    name: 'Run times'
+    name: 'Duration'
     icon: mdi:camera-timer
     entities:
       - input_number.retic_program1_station1_run_time
-      - input_number.retic_program1_station2_run_time
 
   retic_program2_run_times:
-    name: 'Run times'
+    name: 'Duration'
     icon: mdi:camera-timer
     entities:
       - input_number.retic_program2_station1_run_time
-      - input_number.retic_program2_station2_run_time
       
   retic_program3_run_times:
-    name: 'Run times'
+    name: 'Duration'
     icon: mdi:camera-timer
     entities:
       - input_number.retic_program3_station1_run_time
-
 
 automation:
   - alias: Check rain parameters     # check that todays rain doesnt need to disable the retic from running
@@ -294,11 +265,7 @@ automation:
       - platform: template
         value_template: "{{ states('sensor.time') == ((states.input_datetime.retic_program1_start_time_1.attributes.timestamp - 600) | int | timestamp_custom('%H:%M', False)) }}"
       - platform: template
-        value_template: "{{ states('sensor.time') == ((states.input_datetime.retic_program1_start_time_2.attributes.timestamp - 600) | int | timestamp_custom('%H:%M', False)) }}"
-      - platform: template
         value_template: "{{ states('sensor.time') == ((states.input_datetime.retic_program2_start_time_1.attributes.timestamp - 600) | int | timestamp_custom('%H:%M', False)) }}"
-      - platform: template
-        value_template: "{{ states('sensor.time') == ((states.input_datetime.retic_program2_start_time_2.attributes.timestamp - 600) | int | timestamp_custom('%H:%M', False)) }}"
       - platform: state
         entity_id: input_number.allowable_rain_quantity
       - platform: state
@@ -317,8 +284,6 @@ automation:
     trigger:
       - platform: template
         value_template: "{{ states('sensor.time') == (states.input_datetime.retic_program1_start_time_1.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
-      - platform: template
-        value_template: "{{ states('sensor.time') == (states.input_datetime.retic_program1_start_time_2.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
     condition:
       condition: and
       conditions:
@@ -345,8 +310,6 @@ automation:
     trigger:
       - platform: template
         value_template: "{{ states('sensor.time') == (states.input_datetime.retic_program2_start_time_1.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
-      - platform: template
-        value_template: "{{ states('sensor.time') == (states.input_datetime.retic_program2_start_time_2.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
     condition:
       condition: and
       conditions:
@@ -435,7 +398,7 @@ automation:
 
 script:
   retic_program1_run:             #run retic program 1 through each station for selected time
-    alias: Program 1 Run
+    alias: Start Wiese Now
     sequence:
       - service: switch.turn_on
         data:
@@ -444,35 +407,21 @@ script:
       - service: switch.turn_off
         data:
           entity_id: switch.wasser1
-      - service: switch.turn_on
-        data:
-          entity_id: switch.wasser2
-      - delay: "00:{{ states('input_number.retic_program1_station2_run_time')|int }}:00"
-      - service: switch.turn_off
-        data:
-          entity_id: switch.wasser2
       
   retic_program2_run:             #run retic program 2 through each station for selected time
-    alias: Program 2 Run
+    alias: Start Einfahrt Now
     sequence:
       - service: switch.turn_on
         data:
-          entity_id: switch.wasser1
-      - delay: "00:{{ states('input_number.retic_program2_station1_run_time')|int }}:00"
-      - service: switch.turn_off
-        data:
-          entity_id: switch.wasser1
-      - service: switch.turn_on
-        data:
           entity_id: switch.wasser2
-      - delay: "00:{{ states('input_number.retic_program2_station2_run_time')|int }}:00"
+      - delay: "00:{{ states('input_number.retic_program2_station1_run_time')|int }}:00"
       - service: switch.turn_off
         data:
           entity_id: switch.wasser2
           
           
   retic_program3_run:             #run retic program 3 through each station for selected time
-    alias: Program 3 Run
+    alias: Start Blumen Now
     sequence:
       - service: switch.turn_on
         data:

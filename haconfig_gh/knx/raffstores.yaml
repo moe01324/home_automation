@@ -1,47 +1,48 @@
 #############################
 ###  Raffstores
 #############################
-
 cover:
-    - platform: group
-      name: Alle
-      entities:
-        - cover.technikraum
-        - cover.bad_eg
-        - cover.wohnzimmer
-        - cover.fixglas
-        - cover.esszimmer
-        - cover.kuche
-        - cover.flur
-        - cover.wc
-        - cover.bad_og
-        - cover.buro
-        - cover.zimmer
-        - cover.ankleide
-        - cover.schlaf
-        - cover.technikraum
+  - platform: group
+    name: Alle
+    entities:
+      - cover.technikraum
+      - cover.bad_eg
+      - cover.wohnzimmer
+      - cover.fixglas
+      - cover.esszimmer
+      - cover.kuche
+      - cover.flur
+      - cover.wc
+      - cover.bad_og
+      - cover.buro
+      - cover.zimmer
+      - cover.ankleide
+      - cover.schlaf
+      - cover.technikraum
         
-    - platform: group
-      name: Wohnbereich
-      entities:
-        - cover.wohnzimmer
-        - cover.fixglas
-        - cover.esszimmer
-        - cover.kuche
-        
-    - platform: group
-      name: Sonne
-      entities:
-        - cover.wohnzimmer
-        - cover.fixglas
-        - cover.esszimmer
-        - cover.kuche
-        - cover.schlaf
-        - cover.ankleide
-        - cover.zimmer
+  - platform: group
+    name: Wohnbereich
+    entities:
+      - cover.wohnzimmer
+      - cover.fixglas    
+      - cover.esszimmer
+      - cover.kuche
+      
+  - platform: group
+    name: Sonne
+    entities:
+      - cover.wohnzimmer
+      - cover.fixglas
+      - cover.esszimmer
+      - cover.kuche
+      - cover.schlaf
+      - cover.ankleide
+      - cover.zimmer
 
-    - platform: knx
-      name: "Technikraum"
+
+knx:
+  cover:
+    - name: "Technikraum"
       move_long_address: '3/0/0'
       move_short_address: '3/1/0'
       position_address: '3/3/0'
@@ -51,8 +52,7 @@ cover:
       travelling_time_down: 26
       travelling_time_up: 26
 
-    - platform: knx
-      name: "Bad EG"
+    - name: "Bad EG"
       move_long_address: '3/0/1'
       move_short_address: '3/1/1'
       position_address: '3/3/1'
@@ -62,8 +62,8 @@ cover:
       travelling_time_down: 26
       travelling_time_up: 26
      
-    - platform: knx
-      name: "Wohnzimmer"
+
+    - name: "Wohnzimmer"
       move_long_address: '3/0/2'
       move_short_address: '3/1/2'
       position_address: '3/3/2'
@@ -73,8 +73,7 @@ cover:
       travelling_time_down: 26
       travelling_time_up: 26
       
-    - platform: knx
-      name: "Fixglas"
+    - name: "Fixglas"
       move_long_address: '3/0/3'
       move_short_address: '3/1/3'
       position_address: '3/3/3'
@@ -84,8 +83,7 @@ cover:
       travelling_time_down: 26
       travelling_time_up: 26
       
-    - platform: knx
-      name: "Esszimmer"
+    - name: "Esszimmer"
       move_long_address: '3/0/4'
       move_short_address: '3/1/4'
       position_address: '3/3/4'
@@ -95,8 +93,7 @@ cover:
       travelling_time_down: 26
       travelling_time_up: 26
       
-    - platform: knx
-      name: "Küche"
+    - name: "Küche"
       move_long_address: '3/0/5'
       move_short_address: '3/1/5'
       position_address: '3/3/5'
@@ -106,8 +103,7 @@ cover:
       travelling_time_down: 26
       travelling_time_up: 26
       
-    - platform: knx
-      name: "Flur"
+    - name: "Flur"
       move_long_address: '3/0/6'
       move_short_address: '3/1/6'
       position_address: '3/3/6'
@@ -117,8 +113,7 @@ cover:
       travelling_time_down: 60
       travelling_time_up: 60
       
-    - platform: knx
-      name: "WC"
+    - name: "WC"
       move_long_address: '3/0/7'
       move_short_address: '3/1/7'
       position_address: '3/3/7'
@@ -128,8 +123,7 @@ cover:
       travelling_time_down: 26
       travelling_time_up: 26
       
-    - platform: knx
-      name: "Bad OG"
+    - name: "Bad OG"
       move_long_address: '3/0/8'
       move_short_address: '3/1/8'
       position_address: '3/3/8'
@@ -139,8 +133,7 @@ cover:
       travelling_time_down: 26
       travelling_time_up: 26
       
-    - platform: knx
-      name: "Büro"
+    - name: "Büro"
       move_long_address: '3/0/9'
       move_short_address: '3/1/9'
       position_address: '3/3/9'
@@ -150,8 +143,7 @@ cover:
       travelling_time_down: 60
       travelling_time_up: 60
       
-    - platform: knx
-      name: "Zimmer"
+    - name: "Zimmer"
       move_long_address: '3/0/10'
       move_short_address: '3/1/10'
       position_address: '3/3/10'
@@ -160,9 +152,8 @@ cover:
       angle_state_address: '3/6/10'
       travelling_time_down: 60
       travelling_time_up: 60
-      
-    - platform: knx
-      name: "Ankleide"
+
+    - name: "Ankleide"
       move_long_address: '3/0/11'
       move_short_address: '3/1/11'
       position_address: '3/3/11'
@@ -172,8 +163,7 @@ cover:
       travelling_time_down: 26
       travelling_time_up: 26
       
-    - platform: knx
-      name: "Schlaf"
+    - name: "Schlaf"
       move_long_address: '3/0/12'
       move_short_address: '3/1/12'
       position_address: '3/3/12'
@@ -182,9 +172,8 @@ cover:
       angle_state_address: '3/6/12'
       travelling_time_down: 26
       travelling_time_up: 26
-      
-    - platform: knx
-      name: "Technikraum"
+
+    - name: "Technikraum"
       move_long_address: '3/0/0'
       move_short_address: '3/1/0'
       position_address: '3/3/0'
@@ -194,18 +183,16 @@ cover:
       travelling_time_down: 26
       travelling_time_up: 26
 
-switch:   
-  - platform: knx
-    name: Raff Luftig
-    address: '3/5/21'
-    state_address: '3/5/21'
+
+  switch:   
+    - name: Raff Luftig
+      address: '3/5/21'
+      state_address: '3/5/21'
     
-  - platform: knx
-    name: Raff Licht
-    address: '3/5/22'
-    state_address: '3/5/22'
+    - name: Raff Licht
+      address: '3/5/22'
+      state_address: '3/5/22'
     
-  - platform: knx
-    name: Raff Dunkel
-    address: '3/5/23'
-    state_address: '3/5/23'
+    - name: Raff Dunkel
+      address: '3/5/23'
+      state_address: '3/5/23'

@@ -16,7 +16,39 @@ sensor:
       - sunset_time
     scan_interval:
       minutes: 30
-
+      
+  - platform: rest
+    name: RegenOriginal
+    value_template: >
+      {{ value.split(';')[-3] | replace("'","") }}
+    resource: http://at-wetter.tk/api/v1/station/11036/regen/
+    scan_interval:
+      minutes: 60
+    unit_of_measurement: 'l/m²'
+    
+  - platform: rest
+    name: TempOriginal
+    value_template: >
+      {{ value.split(';')[-3] | replace("'","") }}
+    resource: http://at-wetter.tk/api/v1/station/11036/t/
+    scan_interval:
+      minutes: 60
+    unit_of_measurement: '°C'
+    
+  - platform: statistics
+    name: Regen24h
+    entity_id: sensor.regenoriginal
+    max_age:
+      hours: 24
+    sampling_size: 24
+      
+  - platform: statistics
+    name: Temp24h
+    entity_id: sensor.temporiginal
+    max_age:
+      hours: 24
+    sampling_size: 24
+    
   - platform: time_date
     display_options:
       - 'time'
@@ -25,98 +57,82 @@ sensor:
     display_options:
       - 'date'
 
-  - platform: knx
-    name: Helligkeit Süd
-    state_address: '0/1/0'
-    type: 'illuminance'
+
+knx:
+  sensor:
+    - name: Helligkeit Süd
+      state_address: '0/1/0'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Dämmerung
-    state_address: '0/1/1'
-    type: 'illuminance'
+    - name: Daemmerung
+      state_address: '0/1/1'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Wind
-    state_address: '0/1/2'
-    type: 'speed_ms'
+    - name: Wind
+      state_address: '0/1/2'
+      type: 'wind_speed_ms'
     
-  - platform: knx
-    name: Aussentemperatur
-    state_address: '0/1/3'
-    type: 'temperature'
+    - name: Aussentemperatur
+      state_address: '0/1/3'
+      type: 'temperature'
     
-  - platform: knx
-    name: Helligkeit Speis
-    state_address: '0/1/4'
-    type: 'illuminance'
+    - name: Helligkeit Speis
+      state_address: '0/1/4'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Helligkeit Abstellraum
-    state_address: '0/1/5'
-    type: 'illuminance'
+    - name: Helligkeit Abstellraum
+      state_address: '0/1/5'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Helligkeit Flur EG
-    state_address: '0/1/6'
-    type: 'illuminance'
+    - name: Helligkeit Flur EG
+      state_address: '0/1/6'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Helligkeit Bad EG
-    state_address: '0/1/7'
-    type: 'illuminance'
+    - name: Helligkeit Bad EG
+      state_address: '0/1/7'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Helligkeit Wohnzimmer
-    state_address: '0/1/8'
-    type: 'illuminance'
+    - name: Helligkeit Wohnzimmer
+      state_address: '0/1/8'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Helligkeit Essbereich
-    state_address: '0/1/9'
-    type: 'illuminance'
+    - name: Helligkeit Essbereich
+      state_address: '0/1/9'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Helligkeit Stiege
-    state_address: '0/1/10'
-    type: 'illuminance'
+    - name: Helligkeit Stiege
+      state_address: '0/1/10'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Helligkeit Zimmer
-    state_address: '0/1/11'
-    type: 'illuminance'
+    - name: Helligkeit Zimmer
+      state_address: '0/1/11'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Helligkeit Büro
-    state_address: '0/1/12'
-    type: 'illuminance'   
+    - name: Helligkeit Büro
+      state_address: '0/1/12'
+      type: 'illuminance'   
     
-  - platform: knx
-    name: Helligkeit Ankleide
-    state_address: '0/1/13'
-    type: 'illuminance'   
+    - name: Helligkeit Ankleide
+      state_address: '0/1/13'
+      type: 'illuminance'   
     
-  - platform: knx
-    name: Helligkeit WC OG
-    state_address: '0/1/14'
-    type: 'illuminance' 
+    - name: Helligkeit WC OG
+      state_address: '0/1/14'
+      type: 'illuminance' 
     
-  - platform: knx
-    name: Helligkeit Bad OG
-    state_address: '0/1/15'
-    type: 'illuminance'
+    - name: Helligkeit Bad OG
+      state_address: '0/1/15'
+      type: 'illuminance'
+
+    - name: Helligkeit Flur OG
+      state_address: '0/1/16'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Helligkeit Flur OG
-    state_address: '0/1/16'
-    type: 'illuminance'
+    - name: Helligkeit Schlaf
+      state_address: '0/1/17'
+      type: 'illuminance'
     
-  - platform: knx
-    name: Helligkeit Schlaf
-    state_address: '0/1/17'
-    type: 'illuminance'
-    
-  - platform: knx
-    name: Helligkeit Schlaf2
-    state_address: '0/1/18'
-    type: 'illuminance'
+    - name: Helligkeit Schlaf2
+      state_address: '0/1/18'
+      type: 'illuminance'
   

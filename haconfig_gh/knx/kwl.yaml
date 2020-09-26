@@ -1,63 +1,53 @@
-sensor:
-  - platform: knx
-    name: CO2 Schlafzimmer
-    state_address: '6/2/1'
-    type: 'ppm'
-    
-  - platform: knx
-    name: CO2 Wohnzimmer
-    state_address: '6/2/0'
-    type: 'ppm'    
-    
-  - platform: knx
-    name: KWL Airflow
-    state_address: '6/4/0'
-    type: 'DPT-13'
+knx:
+  sensor:
 
-  - platform: knx
-    name: KWL Filter Replace
-    state_address: '6/4/1'
-    type: 'DPT-7'
+    - name: CO2 Schlafzimmer
+      state_address: '6/2/1'
+      type: 'ppm'
+    
+    - name: CO2 Wohnzimmer
+      state_address: '6/2/0'
+      type: 'ppm'    
+    
+    - name: KWL Airflow
+      state_address: '6/4/0'
+      type: 'DPT-13'
 
-  - platform: knx
-    name: KWL Luftfeuchtigkeit Extract
-    state_address: '6/5/2'
-    type: 'humidity'
+    - name: KWL Filter Replace
+      state_address: '6/4/1'
+      type: 'DPT-7'
+
+    - name: KWL Luftfeuchtigkeit Extract
+      state_address: '6/5/2'
+      type: 'humidity'
     
-  - platform: knx
-    name: KWL Luftfeuchtigkeit Exhaust
-    state_address: '6/5/3'
-    type: 'humidity'
+    - name: KWL Luftfeuchtigkeit Exhaust
+      state_address: '6/5/3'
+      type: 'humidity'
     
-  - platform: knx
-    name: KWL Luftfeuchtigkeit Outdoor
-    state_address: '6/5/4'
-    type: 'humidity'
+    - name: KWL Luftfeuchtigkeit Outdoor
+      state_address: '6/5/4'
+      type: 'humidity'
     
-  - platform: knx
-    name: KWL Luftfeuchtigkeit Supply
-    state_address: '6/5/5'
-    type: 'humidity'
+    - name: KWL Luftfeuchtigkeit Supply
+      state_address: '6/5/5'
+      type: 'humidity'
     
  
-switch:   
-  - platform: knx
-    name: KWL Stufe 0
-    address: '0/0/20'
-    state_address: '0/1/20'
+  switch:   
+
+    - name: KWL Stufe 0
+      address: '0/0/20'
+      state_address: '0/1/20'
     
-  - platform: knx
-    name: KWL Stufe 1
-    address: '0/0/21'
-    state_address: '0/1/21'
+    - name: KWL Stufe 1
+      address: '0/0/21'
+      state_address: '0/1/21'
     
-  - platform: knx
-    name: KWL Stufe 2
-    address: '0/0/22'
-    state_address: '0/1/22'
+    - name: KWL Stufe 2
+      address: '0/0/22'
+      state_address: '0/1/22'
     
-  - platform: knx
-    name: KWL Stufe 3
-    address: '0/0/23'
-    state_address: '0/1/23'
-    
+    - name: KWL Stufe 3
+      address: '0/0/23'
+      state_address: '0/1/23'

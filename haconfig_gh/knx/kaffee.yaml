@@ -1,0 +1,150 @@
+sensor:
+  - platform: template    # determine if today is selected as a watering day for program 1
+    sensors:
+      kaffee_program1_day:
+        entity_id: input_boolean.kaffee_program1_monday, input_boolean.kaffee_program1_tuesday, input_boolean.kaffee_program1_wednesday, input_boolean.kaffee_program1_thursday, input_boolean.kaffee_program1_friday, input_boolean.kaffee_program1_saturday, input_boolean.kaffee_program1_sunday, sensor.time
+        value_template:  >
+          {% set sensor_names = [ 'monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'] %}
+          {% set today_name = sensor_names[now().weekday()] %}
+          {% set entity_id = 'input_boolean.kaffee_program1_'+today_name %}
+          {{ is_state(entity_id, 'on') }}
+
+    
+input_datetime:
+  kaffee_program1_start_time_1:    # program start time control
+    name: Kaffee Start Time
+    has_date: false
+    has_time: true
+
+
+input_number:
+  kaffee_program1_station1_run_time:
+    name: Kaffee Run Time
+    min: 15
+    max: 30
+    step: 1
+    icon: mdi:camera-timer
+
+input_boolean:
+  kaffee_program1_monday:
+    name: Monday
+
+  kaffee_program1_tuesday:
+    name: Tuesday
+
+  kaffee_program1_wednesday:
+    name: Wednesday
+
+  kaffee_program1_thursday:
+    name: Thursday
+    
+  kaffee_program1_friday:
+    name: Friday
+
+  kaffee_program1_saturday:
+    name: Saturday
+    
+  kaffee_program1_sunday:
+    name: Sunday
+
+  kaffee_program1_enable:   # enable program to run
+    name: Enable
+    
+  kaffee_station_1_run:
+    name: Kaffee Run
+  
+
+
+group:                  # frontend interface setup
+  kaffee_manual:
+    name: 'Manual Control'
+    entities:
+      - switch.kaffee
+
+  
+  kaffee_program1:
+    name: 'Kaffee'
+    entities:
+      - input_boolean.kaffee_program1_enable
+      - script.kaffee_program1_run
+      - input_datetime.kaffee_program1_start_time_1
+      - group.kaffee_program1_watering_days
+      - group.kaffee_program1_run_times
+
+  kaffee_program1_days:
+    name: 'Days Kaffee'
+    icon: mdi:calendar-multiple-check
+    entities:
+      - input_boolean.kaffee_program1_monday
+      - input_boolean.kaffee_program1_tuesday
+      - input_boolean.kaffee_program1_wednesday
+      - input_boolean.kaffee_program1_thursday
+      - input_boolean.kaffee_program1_friday
+      - input_boolean.kaffee_program1_saturday
+      - input_boolean.kaffee_program1_sunday
+
+  kaffee_program1_run_times:
+    name: 'Run times'
+    icon: mdi:camera-timer
+    entities:
+      - input_number.kaffee_program1_station1_run_time
+
+automation:
+  - alias: Kaffee Run Program 1     # start program 1 at designated time if it is enabled and today is selected as a watering day
+    initial_state: 'on'
+    trigger:
+      - platform: template
+        value_template: "{{ states('sensor.time') == (states.input_datetime.kaffee_program1_start_time_1.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.kaffee_program1_enable
+          state: 'on'
+        - condition: state
+          entity_id: sensor.kaffee_program1_day
+          state: 'True'
+    action:
+      - service: script.turn_on
+        entity_id: script.kaffee_program1_run
+
+
+  - alias: Kaffee Station 1 Run
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: input_boolean.kaffee_station_1_run
+    action:
+      - service_template: >
+          {% if is_state('input_boolean.kaffee_station_1_run', 'on') %}
+            script.kaffee_station_1_run
+          {% else %}
+            script.kaffee_station_1_stop
+          {% endif %}
+
+script:
+  kaffee_program1_run:
+    alias: Kaffee Program 1 Run
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.kaffeemaschine
+      - delay: "00:{{ states('input_number.kaffee_program1_station1_run_time')|int }}:00"
+      - service: switch.turn_off
+        data:
+          entity_id: switch.kaffeemaschine
+      
+
+  kaffee_station_1_run:
+    alias: Kaffee Station 1 Run
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.kaffeemaschine
+  
+  kaffee_station_1_stop:
+    alias: Kaffee Station 1 Stop
+    sequence:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.kaffeemaschine
