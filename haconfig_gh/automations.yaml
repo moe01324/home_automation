@@ -357,7 +357,7 @@
   - service: alarm_control_panel.alarm_arm_away
     data:
       entity_id: alarm_control_panel.home_alarm
-      code: '1804'
+      code: 
 - alias: Disarm alarm by switch
   trigger:
   - platform: state
@@ -367,7 +367,7 @@
   - service: alarm_control_panel.alarm_disarm
     data:
       entity_id: alarm_control_panel.home_alarm
-      code: '1804'
+      code: 
 ## Nuki deaktiviert Alarm
 - alias: Deaktiviere Alarm via Nuki
   trigger:
