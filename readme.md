@@ -232,6 +232,12 @@ Integrated into Homeassistant for automation and control.
 To receive local rain data the API at http://at-wetter.tk/api/v1/station/11036/regen is used. 
 This allows to disable irrigation when it was anyway raining in the last few hours.
 
+#### Wifi Smart Plugs
+
+In the garage U use a pair of Gosund WLAN Smart plugs to allow control via HomeAssistant.
+Just added them via the Smart Life Andoird App, the Tuya HA integration finds them. More info in the HA forum:
+https://community.home-assistant.io/t/wifi-gosund-plug/97932
+
 # Links
 
 Following online resource were quite helpful for me:
