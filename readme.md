@@ -237,6 +237,9 @@ This allows to disable irrigation when it was anyway raining in the last few hou
 In the garage U use a pair of Gosund WLAN Smart plugs to allow control via HomeAssistant.
 Just added them via the Smart Life Andoird App, the Tuya HA integration finds them. More info in the HA forum:
 https://community.home-assistant.io/t/wifi-gosund-plug/97932
+Downside: this goes via the Tuya/Gosund cloud...
+
+Local alternative could be: https://github.com/rospogrigio/localtuya
 
 # Links
 
