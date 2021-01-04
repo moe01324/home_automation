@@ -241,6 +241,14 @@ Downside: this goes via the Tuya/Gosund cloud...
 
 Local alternative could be: https://github.com/rospogrigio/localtuya
 
+#### CCTV cameras
+
+The CCTV cameras are integrated via Motioneye. After trying multiple different opensource solutions, Motioneye could fullfil most of the requirements (useful motion detection with recording and notification, nice UI, easy setup, integration into HA).
+https://github.com/ccrisan/motioneye/wiki
+
+Integration into HA works with 2 options, either including a Panel Iframe, https://www.home-assistant.io/integrations/panel_iframe/ , or just displaying a camera component with the correct RTSP stream.
+Also webhooks can be used to receive notifications from motioneye.
+
 # Links
 
 Following online resource were quite helpful for me:
