@@ -15,6 +15,8 @@ Running Debian with Docker Images
 * Portainer - portainer/portainer
 * Grafana - grafana/grafana:latest
 * Influx - influxdb:latest
+* MotionEye - ccrisan/motioneye:master-amd64 - for CCTV
+* ESP Home - esphome/esphome:latest - to integrate ESP32 based sensors
 
 ## Unifi Controller
 Gives an nice UI to manage everything network related. Though I have to admit a little bit unstable when adding new stuff or making major changes. If everything runs, it runs flawless.
@@ -78,6 +80,7 @@ Screenshots from my android mobile.
 ## UI / Lovelace
 
 The UI config is available in the folder /haconfig_gh/.
+MUST have: HACS. https://community.home-assistant.io/t/custom-component-hacs/121727 To manage all custom components.
 
 ### Themes 
 All Themes are installed via HACS.
@@ -127,6 +130,7 @@ In addition some comfort features like closing the blinds in the bath at night.
 
 * Lights 
 All main lights are controlled via KNX motion detectors. Usually I dont need to use any light switches.
+Also nice: open the terrace door, the terrace light goes on. To find/see the cats... ;-)
 
 * Garden Irrigation
 Can be scheduled via HA UI.
@@ -249,12 +253,16 @@ https://github.com/ccrisan/motioneye/wiki
 Integration into HA works with 2 options, either including a Panel Iframe, https://www.home-assistant.io/integrations/panel_iframe/ , or just displaying a camera component with the correct RTSP stream.
 Also webhooks can be used to receive notifications from motioneye.
 
+#### ESP32 Sensors
+to be documented...
+
 # Links
 
 Following online resource were quite helpful for me:
 https://community.home-assistant.io/
 https://knx-user-forum.de
-
+https://community.home-assistant.io/t/knx-cookbook/230972 The HA KNX Cookbook
+https://github.com/adonno/Home-AssistantConfig Gave inspiration to document everything
 
 If you found this helpful, feel free to buy me a coffee:
 https://www.buymeacoffee.com/t2JeMGFmx
