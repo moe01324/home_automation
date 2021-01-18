@@ -254,7 +254,14 @@ Integration into HA works with 2 options, either including a Panel Iframe, https
 Also webhooks can be used to receive notifications from motioneye.
 
 #### ESP32 Sensors
-to be documented...
+
+Garage Temp Sensor & Display
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/esp/garage.png" height="500px" />
+
+Via ESP Home and Home Assistant this little device collects and displays data in the garage (which is a detached building, but has Wifi coverage).
+
+ESPHome code: https://github.com/moe01324/home_automation/blob/master/esp/garage-esphome
+Case for 3d printing: https://www.thingiverse.com/thing:2937731/files The case takes the small LCD and the ESP8266. The sensor is just glued to the side.
 
 # Links
 
