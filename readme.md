@@ -255,7 +255,7 @@ Also webhooks can be used to receive notifications from motioneye.
 
 #### ESP32 Sensors
 
-Garage Temp Sensor & Display
+##### Garage Temp Sensor & Display
 <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/esp/garage.png" height="500px" />
 
 Via ESP Home and Home Assistant this little device collects and displays data in the garage (which is a detached building, but has Wifi coverage).
