@@ -1,0 +1,95 @@
+esphome:
+  name: garagetest
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: ""
+  password: ""
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Garagetest Fallback Hotspot"
+    password: ""
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: ""
+
+ota:
+  password: ""
+
+time:
+  - platform: homeassistant
+    id: esptime
+  
+font:
+  - file: 'arial.ttf'
+    id: font3
+    size: 15  
+  
+sensor:
+  - platform: dht
+    pin: D7
+    temperature:
+      name: "Garage Temperature"
+      filters:
+        - offset: -1.0
+    humidity:
+      name: "Garage Humidity"
+    update_interval: 60s
+    model: AM2302
+
+  - platform: homeassistant
+    id: garage_ha_temperature
+    entity_id: sensor.garage_temperature
+    internal: true
+    
+  - platform: homeassistant
+    id: garage_ha_humidity
+    entity_id: sensor.garage_humidity
+    internal: true
+
+  - platform: homeassistant
+    id: outside_temperature
+    entity_id: sensor.aussentemperatur
+    internal: true
+
+i2c:
+  sda: D1
+  scl: D2
+  scan: False
+
+display:
+  - platform: ssd1306_i2c
+    model: "SH1106 128x64"
+    reset_pin: D0
+    address: 0x3C
+    lambda: |-
+
+
+      if (id(garage_ha_temperature).has_state()) {
+        it.printf(127, 0, id(font3), TextAlign::TOP_RIGHT , "%.1f°", id(garage_ha_temperature).state);
+      }
+      if (id(garage_ha_temperature).has_state()) {
+        it.printf(0, 0, id(font3), TextAlign::TOP_LEFT , "Garage T:");
+      }
+
+      if (id(garage_ha_temperature).has_state()) {
+        it.printf(127, 23, id(font3), TextAlign::TOP_RIGHT , "%.1f%%", id(garage_ha_humidity).state);
+      }
+      if (id(garage_ha_temperature).has_state()) {
+        it.printf(0, 23, id(font3), TextAlign::TOP_LEFT , "Garage LF:");
+      }
+
+      if (id(outside_temperature).has_state()) {
+        it.printf(127, 60, id(font3), TextAlign::BASELINE_RIGHT , "%.1f°", id(outside_temperature).state);
+      }
+      if (id(outside_temperature).has_state()) {
+        it.printf(0, 60, id(font3), TextAlign::BASELINE_LEFT , "Aussen T:");
+      }
