@@ -3,6 +3,41 @@
 This page shall document and present the home automation I am running.
 Feel free to contact me with detailed questions.
 
+- [Server](#server)
+  - [Unifi Controller](#unifi-controller)
+  - [Portainer](#portainer)
+  - [Grafana/Influx](#grafanainflux)
+  - [Keepass](#keepass)
+- [Home Assistant](#home-assistant)
+  - [General Setup](#general-setup)
+    - [Screenshots Desktop](#screenshots-desktop)
+    - [Screenshots Mobile](#screenshots-mobile)
+  - [UI / Lovelace](#ui--lovelace)
+    - [Themes](#themes)
+    - [Custom Components](#custom-components)
+    - [Other Stuff](#other-stuff)
+  - [Automations](#automations)
+  - [Telegram Integration](#telegram-integration)
+- [KNX](#knx)
+  - [KNX Switches](#knx-switches)
+- [Network](#network)
+- [Other Components](#other-components)
+    - [Distribution Box](#distribution-box)
+    - [Alpha Innotect Heatpump](#alpha-innotect-heatpump)
+    - [Zehnder Q350](#zehnder-q350)
+    - [Nuki Smartlock](#nuki-smartlock)
+    - [Sonos One](#sonos-one)
+    - [Alarm System](#alarm-system)
+    - [Smoke Detectors](#smoke-detectors)
+    - [Garden Irrigation](#garden-irrigation)
+      - [Weather data](#weather-data)
+      - [Wifi Smart Plugs](#wifi-smart-plugs)
+      - [CCTV cameras](#cctv-cameras)
+      - [ESP32 Sensors](#esp32-sensors)
+- [Links](#links)
+
+
+
 # Server
 
 Server
