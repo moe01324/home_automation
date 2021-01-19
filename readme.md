@@ -259,6 +259,9 @@ Are also integrated into Homeassistant.
 A Raspberry Pi connect to some relays that are controlling Rainbird water valves.
 Integrated into Homeassistant for automation and control.
 
+Actual control of the relays is done via http://wiringpi.com/ , from a very simple script from: https://pirelay.jasonfindlay.com/ 
+Explained usage: https://www.raspberrypi.org/forums/v...=60008#p474778
+Not fancy, but working. ;-)
 
 <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/misc/irrig1.jpg" height="500px" />
 
