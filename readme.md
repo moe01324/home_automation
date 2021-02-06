@@ -301,6 +301,15 @@ Via ESP Home and Home Assistant this little device collects and displays data in
 ESPHome code: https://github.com/moe01324/home_automation/blob/master/esp/garage-esphome
 Case for 3d printing: https://www.thingiverse.com/thing:2937731/files The case takes the small LCD and the ESP8266. The sensor is just glued to the side.
 
+
+##### Media Control
+
+Following adamaze with https://github.com/adamaze/esphome_volume_knob a ESP8266 together with a rotary encoder and a small 3d printed case create a physical controller for the office Sonos. Volume, pause, next track etc.
+Next evolution will include a 128x128 oled display to show the currently playing song.
+Code and HW done, still working on the case...
+
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/esp/media_knob.jpg" height="500px" />
+
 # Links
 
 Following online resource were quite helpful for me:
