@@ -1,0 +1,192 @@
+esphome:
+  name: mediacontroller
+  platform: ESP32
+  board: esp-wrover-kit
+
+wifi:
+  ssid: ""
+  password: "!"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Mediacontroller Fallback Hotspot"
+    password: ""
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: ""
+
+ota:
+  password: ""
+  
+time:
+  - platform: homeassistant
+    id: time1
+
+font:
+  - file: 'arial.ttf'
+    id: font3
+    size: 12
+    
+  - file: 'arial.ttf'
+    id: fontbig
+    size: 35 
+
+    
+color:
+  - id: my_red
+    red: 100%
+    green: 3%
+    blue: 5%    
+    
+
+
+spi:
+  clk_pin: GPIO16
+  mosi_pin: GPIO17
+  
+display:
+  - platform: ssd1351_spi
+    model: "SSD1351 128x128"
+    reset_pin: GPIO25
+    cs_pin: GPIO19
+    dc_pin: GPIO18
+    id: my_display
+    pages:
+      - id: page1
+        lambda: |-
+          // Print time in HH:MM format
+          it.strftime(0, 60, id(fontbig), TextAlign::BASELINE_LEFT, "%l:%M", id(time1).now());
+          // Print AM/PM 
+          it.strftime(127, 60, id(fontbig), TextAlign::BASELINE_RIGHT, "%P", id(time1).now());
+      - id: page2
+        lambda: |-
+          // Print "Spotify Song" on top left.
+          if (id(spotify_artist).has_state()) {
+            it.printf(0, 30, id(font3), TextAlign::BASELINE_LEFT, "%s", id(spotify_artist).state.c_str(), id(my_red));
+            
+          }
+          // Print "Spotify Artist" on bottom left.
+          if (id(spotify_song).has_state()) {
+            it.printf(0, 60, id(font3), TextAlign::BASELINE_LEFT, "%s", id(spotify_song).state.c_str());
+          }
+      - id: page3
+        lambda: |-          
+          // Print time in HH:MM format
+          it.strftime(0, 60, id(font3), TextAlign::BASELINE_LEFT, "%l:%M", id(time1).now());
+          // Print AM/PM
+          it.strftime(127, 60, id(font3), TextAlign::BASELINE_RIGHT, "%P", id(time1).now());
+
+
+interval:
+  - interval: 5s
+    then:
+      - display.page.show_next: my_display
+      - component.update: my_display
+
+text_sensor:
+  - platform: homeassistant
+    id: spotify_song
+    entity_id: sensor.media_song
+    internal: true
+
+  - platform: homeassistant
+    id: spotify_artist
+    entity_id: sensor.media_artist
+    internal: true
+
+    
+    
+binary_sensor:
+  - platform: gpio
+    id: button_kitchen
+    pin:
+      number: GPIO15
+      mode: INPUT_PULLUP
+      inverted: True
+    on_multi_click:
+    - timing:
+      - ON for at most 1s
+      - OFF for at most 1s
+      - ON for at most 1s
+      - OFF for at least 0.2s
+      then:
+        - homeassistant.service:
+            service: media_player.media_next_track
+            data:
+              entity_id: media_player.buro
+        - logger.log: "double click - next track"
+    - timing:
+      - ON for .5s to 2s
+      - OFF for at least 0.1s
+      then:
+        - script.execute: start_playlist_shuffle
+        - logger.log: "long press - play spotify playlist"
+    - timing:
+      - ON for at most .49s
+      - OFF for at least 0.25s
+      then:
+        - homeassistant.service:
+            service: media_player.media_play_pause
+            data:
+              entity_id: media_player.buro
+        - logger.log: "single click - play/pause"
+
+sensor:
+  - platform: rotary_encoder
+    id: knob_buro
+    pin_a: GPIO27
+    pin_b: GPIO26
+    min_value: -3
+    max_value: 3
+    on_value_range:
+      - above: 2
+        then:
+          - script.execute: volume_up
+      - below: -2
+        then:
+          - script.execute: volume_down
+              
+script:
+  - id: volume_up
+    then:
+      - homeassistant.service:
+          service: media_player.volume_up
+          data:
+            entity_id: media_player.buro
+      - logger.log: "vol up trigger"
+      - sensor.rotary_encoder.set_value:
+          id: knob_buro
+          value: 0
+  - id: volume_down
+    then:
+      - homeassistant.service:
+          service: media_player.volume_down
+          data:
+            entity_id: media_player.buro
+      - logger.log: "vol down trigger"
+      - sensor.rotary_encoder.set_value:
+          id: knob_buro
+          value: 0
+  - id: start_playlist_shuffle
+    then:
+      - homeassistant.service:
+          service: media_player.play_media
+          data:
+            entity_id: media_player.buro
+            media_content_id: spotify:playlist:7qFH2xh3ZiewF1WDgXQbfC
+            media_content_type: playlist
+      - homeassistant.service:
+          service: media_player.shuffle_set
+          data:
+            entity_id: media_player.buro
+            shuffle: "true"
+      - homeassistant.service:
+          service: media_player.media_next_track
+          data:
+            entity_id: media_player.buro
