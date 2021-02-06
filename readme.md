@@ -305,10 +305,18 @@ Case for 3d printing: https://www.thingiverse.com/thing:2937731/files The case t
 ##### Media Control
 
 Following adamaze with https://github.com/adamaze/esphome_volume_knob a ESP8266 together with a rotary encoder and a small 3d printed case create a physical controller for the office Sonos. Volume, pause, next track etc.
-Next evolution will include a 128x128 oled display to show the currently playing song.
-Code and HW done, still working on the case...
 
 <img src="https://raw.githubusercontent.com/moe01324/home_automation/master/esp/media_knob.jpg" height="500px" />
+
+ESPHome Yaml:
+https://github.com/moe01324/home_automation/blob/master/esp/mediacontroller.yaml
+
+Version2, includes a 128x128 oled display to show the currently playing song.
+
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/esp/media_controller.jpg" height="500px" />
+
+STL at thingyverse:
+https://www.thingiverse.com/thing:4751921
 
 # Links
 
