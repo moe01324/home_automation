@@ -232,8 +232,10 @@ This allows to sideload any Andoird Apps, e.g. the Home Assistan Companion App.
 
 Created an additional HA view, shows cameras, temps, train schedule etc.
 
+Connection via WIFI, power is directly 220V. Powerconsumption between 3W at startup, scrolling on HA 2W, idle with screen on 1.6W, idle screen off 1W.
 Panel sleeps after 30sec, wakup via screenpress or "wave". To configure: https://github.com/seaky/nspanel_pro_tools_apk
 Unfortunately, the Doorbird App does not run properly on 480x480, the button to enable the intercom is "out of screen". Doorbird support says the minimum screen resolution is 640px in height... 
+
 
 ### Distribution Box
 Houses all the fuses and KNX components.
