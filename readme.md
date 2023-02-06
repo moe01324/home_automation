@@ -22,6 +22,7 @@ Feel free to contact me with detailed questions.
   - [KNX Switches](#knx-switches)
 - [Network](#network)
 - [Other Components](#other-components)
+    - [Sonoff NS Panel Pro](#sonoff-ns-panel-pro)
     - [Distribution Box](#distribution-box)
     - [Alpha Innotect Heatpump](#alpha-innotect-heatpump)
     - [Zehnder Q350](#zehnder-q350)
@@ -218,6 +219,21 @@ The Unifi Controller is running as a docker container.
 
 # Other Components
 A quick overview of some other devices and compontents that are integrated into the overall solution.
+
+### Sonoff NS Panel Pro
+
+SONOFF NSPanel Pro Smart Scene Wall Switch, is default state with the proprietary SW it´s rather useless. BUT.
+Following the instructions https://blakadder.com/android-panel-webview/ a default android webview and launcher can be installed.
+This allows to sideload any Andoird Apps, e.g. the Home Assistan Companion App.
+
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/sonoff2.jpg" height="500px" />
+
+<img src="https://raw.githubusercontent.com/moe01324/home_automation/master/pics/sonoff1.jpg" height="500px" />
+
+Created an additional HA view, shows cameras, temps, train schedule etc.
+
+Panel sleeps after 30sec, wakup via screenpress or "wave". To configure: https://github.com/seaky/nspanel_pro_tools_apk
+Unfortunately, the Doorbird App does not run properly on 480x480, the button to enable the intercom is "out of screen". Doorbird support says the minimum screen resolution is 640px in height... 
 
 ### Distribution Box
 Houses all the fuses and KNX components.
