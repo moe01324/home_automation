@@ -336,6 +336,14 @@ Version2, includes a 128x128 oled display to show the currently playing song.
 STL at thingyverse:
 https://www.thingiverse.com/thing:4751921
 
+##### Cooling via Wärmepumpe
+https://kundendienst.ait-group.net/alpha-innotec/15dc7164-368e-ec11-b400-000d3a27216a/83059300hDE_HSV_HSDV.pdf
+
+TB1 Klemme muss geschlossen sein? 
+
+https://www.alpha-innotec.ch/fileadmin/content/downloads/Lux_Fachhandwerker_de.pdf
+
+
 # Links
 
 Following online resource were quite helpful for me:
